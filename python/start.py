@@ -18,8 +18,18 @@ class bilibili:
         r = requests.get(url)
         print(r.text)
 class danmu:
-    def 解析哔哩哔哩的XML(xml):
+    data={'info':0,'text':[],'attr':[]}#弹幕数据
+    def 解析哔哩哔哩的XML(self,xml):
         tree = ET.parse(xml)
         root = tree.getroot()
+        #共有多少d标签
+        self.data['info']=len(root.findall('d'))
         for i in root.iter('d'):
-            pass
+            print(i.text)
+            #获取p属性
+            print(i.attrib['p'])
+            
+            
+            
+xml=open('temp/1.xml', 'r', encoding='utf-8')
+danmu.解析哔哩哔哩的XML(xml)
