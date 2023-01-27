@@ -17,8 +17,10 @@ class bilibili:
         url = 'https://api.bilibili.com/x/web-interface/search/type?search_type=media_bangumi&keyword={}'.format(keyword)
         r = requests.get(url)
         print(r.text)
-class danmu:
+class danmu(object):
     data={'info':0,'text':[],'attr':[]}#弹幕数据
+    def __init__(self):
+        self.data={'info':0,'text':[],'attr':[]}#弹幕数据
     def 解析哔哩哔哩的XML(self,xml):
         tree = ET.parse(xml)
         root = tree.getroot()
@@ -28,5 +30,6 @@ class danmu:
             self.data['text'].append(i.text)
             self.data['attr'].append(i.attrib['p'])
         print(self.data)
-xml=open('temp/1.xml', 'r', encoding='utf-8')
-danmu.解析哔哩哔哩的XML(xml)
+xml=open('python/temp/1.xml', 'r', encoding='utf-8')
+danmu1=danmu()
+danmu1.解析哔哩哔哩的XML(xml)
