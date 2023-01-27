@@ -18,7 +18,6 @@ class bilibili:
         r = requests.get(url)
         print(r.text)
 class danmu(object):
-    data={'info':0,'text':[],'attr':[]}#弹幕数据
     def __init__(self):
         self.data={'info':0,'text':[],'attr':[]}#弹幕数据
     def 解析哔哩哔哩的XML(self,xml):
@@ -30,6 +29,14 @@ class danmu(object):
             self.data['text'].append(i.text)
             self.data['attr'].append(i.attrib['p'])
         print(self.data)
+    def 获取总弹幕数(self):
+        return self.data['info']
+    def 获取单个弹幕(self,弹幕序号):
+        分割后的弹幕属性=self.data['attr'][弹幕序号].split(',')
+        json1={'text':self.data['text'][弹幕序号],'秒':分割后的弹幕属性[0],'弹幕模式':分割后的弹幕属性[1],'字体大小':分割后的弹幕属性[2],'颜色':分割后的弹幕属性[3],'发送时间':分割后的弹幕属性[4],'弹幕池':分割后的弹幕属性[5],'用户hash':分割后的弹幕属性[6],'rowID':分割后的弹幕属性[7]}
+        return json1
 xml=open('python/temp/1.xml', 'r', encoding='utf-8')
 danmu1=danmu()
 danmu1.解析哔哩哔哩的XML(xml)
+print(danmu1.获取总弹幕数())
+print(danmu1.获取单个弹幕(5))
