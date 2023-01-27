@@ -23,5 +23,5 @@ class danmu:
         root = tree.getroot()
         for i in root.iter('d'):
             print(i.text)
-xml=open('python/temp/1.xml', 'r', encoding='utf-8')
+xml=open('temp/1.xml', 'r', encoding='utf-8')
 danmu.解析哔哩哔哩的XML(xml)
