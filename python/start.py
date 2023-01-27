@@ -18,7 +18,6 @@ class bilibili:
         r = requests.get(url)
         print(r.text)
 class danmu(object):
-    data={'info':0,'text':[],'attr':[]}#弹幕数据
     def __init__(self):
         self.data={'info':0,'text':[],'attr':[]}#弹幕数据
     def 解析哔哩哔哩的XML(self,xml):
