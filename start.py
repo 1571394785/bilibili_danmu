@@ -15,7 +15,7 @@ class bilibili:
                 print(i['cid'], i['share_copy'])
     def 搜索番剧epid关键词(keyword):
         url = 'https://api.bilibili.com/x/web-interface/search/type?search_type=media_bangumi&keyword={}'.format(keyword)
-        r = requests.get(url, cookies=cookies)
+        r = requests.get(url)
         print(r.text)
 class danmu:
     def 解析哔哩哔哩的XML(xml):
