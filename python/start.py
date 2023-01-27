@@ -25,11 +25,8 @@ class danmu:
         #共有多少d标签
         self.data['info']=len(root.findall('d'))
         for i in root.iter('d'):
-            print(i.text)
-            #获取p属性
-            print(i.attrib['p'])
-            
-            
-            
+            self.data['text'].append(i.text)
+            self.data['attr'].append(i.attrib['p'])
+        print(self.data)
 xml=open('temp/1.xml', 'r', encoding='utf-8')
 danmu.解析哔哩哔哩的XML(xml)
