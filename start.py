@@ -22,4 +22,4 @@ class danmu:
         tree = ET.parse(xml)
         root = tree.getroot()
         for i in root.iter('d'):
-            print(i.text)
+            pass
