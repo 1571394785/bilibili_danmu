@@ -33,10 +33,6 @@ shitty code ┗┛┗┛  ┗┛┗┛
             font-size: 20px;
             margin-top: 0px;
         }
-        #dm1 {
-            font-size: 20px;
-            margin-top: 0px;
-        }
 
     </style>
 </head>
@@ -45,26 +41,26 @@ shitty code ┗┛┗┛  ┗┛┗┛
     <div id="js1">这软件儿可以把B站弹幕塞进任何视频观看</div>
     <div id="js2">（目前智齿本地视频）</div>
     <script>
-
+        // 生成弹幕div
+        function createDiv(id1) {
+            danmu=["2333333","哈哈哈哈哈哈哈","开幕雷击","前方高能","下次一定","草","禁止套娃","爷青回","双厨狂喜","泪目","逮虾户","66666666","QAQ","有内味了","真实","真香","空降成功","我从未见过如此厚颜无耻之人","可怜你帅不过坂本大佬","啊，那个郭德纲","鱼，好大的鱼，虎纹鲨鱼","表白字幕君","表白科普君","卧槽","正片开始","颜表立","弹幕护体","优雅","标准结局","注入灵魂","名场面","妙啊","破防了"];
+            var div = document.createElement("div");
+            // 在danmu数组中随机选取一条弹幕
+            div.innerText = danmu[Math.floor(Math.random() * danmu.length)];
+            div.id = id1;
+            return div;
+        }
+        // 放置弹幕div
+        function putDiv(div) {
+            document.body.appendChild(div);
+        }
+        for (var i = 1; i <= 100; i++) {
+            var div = createDiv("dm" + i);
+            putDiv(div);
+        }
     </script>
-            <div id="dm1">2333333</div>
-            <div id="dm2">哈哈哈哈哈哈哈</div>
-            <div id="dm3">开幕雷击</div>
-            <div id="dm4">前方高能</div>
-            <div id="dm5">下次一定</div>
-            <div id="dm6">草</div>
-            <div id="dm7">禁止套娃</div>
-            <div id="dm8">爷青回</div>
-            <div id="dm9">双厨狂喜</div>
-            <div id="dm10">泪目</div>
-            <div id="dm11">逮虾户</div>
-            <div id="dm12">66666666</div>
-            <div id="dm13">QAQ</div>
-            <div id="dm14">有内味了</div>
-            <div id="dm15">真实</div>
-            <div id="dm16">真香</div>
-            <div id="dm17">空降成功</div>
-            <div id="dm18">爷青回</div>
     
 </body>
 </html>
+
+    
