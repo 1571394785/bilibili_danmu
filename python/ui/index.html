@@ -1,21 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <title>Python UI</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8" >
+    <title>TEST Page</title>
+    <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+    <script language="javascript">
+        // 用于PyQt5代码返回值后调用
+        function callback(result) {
+            alert('计算结果:' + result);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // 这里面的channel就是PyQt5传递过来的channel对象，其中包含了可供调用的obj对象（一个Factorial类对象）
+            new QWebChannel(qt.webChannelTransport, function (channel) {
+                // 从channel中获取到我们注册到channel中的Factorial类对象
+                window.obj = channel.objects.obj;
+            });
+        });
+
+        function onFactorial() {
+            // 如果获取到了Factorial对象
+            if (window.obj) {
+                // 获取输入框中的数字
+                var n = parseInt(document.getElementById('n').value);
+                // 调用Factorial类对象中的槽函数factorial(n),并且指定一个异步调用的callback函数，当factorial返回时
+                // 自动调用callback
+                window.obj.factorial(n, callback);
+            }
+        }
+    </script>
 </head>
+<style>
+    div{
+        text-align: center;
+    }
+</style>
 <body>
-    <div class="container">
-        <input type="text" id="input" placeholder="Enter your code here" value="123"/>
-        <button id="run" onclick="run()">Run</button>
+    <div>
+        <h1>用户使用条款</h1>
+        <p>1. 本软件仅供学习交流使用，不得用于商业用途。</p>
+        <p>2. 宣传时请注明出处。</p>
+        <input type="checkbox" id="agree" name="agree" value="agree"/>我已阅读并同意以上条款
+        <br/>
+        <button id="btn" onclick="onFactorial()">同意</button>
     </div>
 </body>
-<script>
-    // 和QT交互的函数
-    function run() {
-        var input = document.getElementById("input").value;
-        return input;
-    }
-</script>
 </html>
