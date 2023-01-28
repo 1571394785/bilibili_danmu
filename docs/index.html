@@ -95,10 +95,15 @@ shitty code ┗┛┗┛  ┗┛┗┛
         // 生成弹幕div
         function createdanmu() {
             danmu= window.danmu
+            color=["#FE0302","#FF7204","#FFAA02","#FFD302","#FFFF00","#A0EE00","#00CD00","#019899","#4266BE","#89D5FF","#CC0273","#222222","#9B9B9B","#FFFFFF"];
             random_danmu=danmu[Math.floor(Math.random()*danmu.length)];
+            random_color=color[Math.floor(Math.random()*color.length)];
+            //random_position大部分0，少部分1，2
+            random_position=Math.floor(Math.random()*3);
+            random_position=String(random_position);
             json1 = {
                 "text": random_danmu,
-                "color": "#000000",
+                "color":random_color,
                 "size": "1",
                 "position": "0",
                 "time": $('#danmu').data("nowTime")+1
