@@ -83,11 +83,15 @@ shitty code ┗┛┗┛  ┗┛┗┛
         }
         // 生成弹幕
         function add(){
-            console.log("add");
             var dm=createdanmu()
-            console.log(dm);
             $("#danmu").danmu("addDanmu",dm)
         }
+        // 监听窗口大小
+        $(window).resize(function () {
+            console.log(window.innerHeight-1);
+            document.getElementById("danmu").style.height = window.innerHeight-1;
+            document.getElementById("danmu").style.width = window.innerWidth;
+        });
         //运行
         $("#danmu").danmu({
             height: window.innerHeight-1,   //弹幕区域高度
