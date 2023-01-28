@@ -11,7 +11,9 @@
           ╰━┫     ╰╯╰┳━━━━╯
           / ┃┏┳┳━━┓┏┳┫
 shitty code ┗┛┗┛  ┗┛┗┛
--->
+--> <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+    <!-- jquery.danmu.js (//github.com/chiruom/danmu/) - Licensed under the MIT license -->
+    <script src="js\jquery.danmu.min.js" type="text/javascript"></script>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <style>
         body {
@@ -19,6 +21,7 @@ shitty code ┗┛┗┛  ┗┛┗┛
             color: #ffffff;
             font-family: "inherit";
             text-align: center;
+            margin: 0;
         }
         h1 {
             font-size: 100px;
@@ -33,31 +36,61 @@ shitty code ┗┛┗┛  ┗┛┗┛
             font-size: 20px;
             margin-top: 0px;
         }
+        #danmu{
+            margin: 0;
+            padding: 0;
+        }
+
 
     </style>
 </head>
 <body>
+    <div id="danmu"></div>
     <h1>哔哩哔哩弹幕姬</h1>
     <div id="js1">这软件儿可以把B站弹幕塞进任何视频观看</div>
     <div id="js2">（目前智齿本地视频）</div>
     <script>
         // 生成弹幕div
-        function createDiv(id1) {
-            danmu=["2333333","哈哈哈哈哈哈哈","开幕雷击","前方高能","下次一定","草","禁止套娃","爷青回","双厨狂喜","泪目","逮虾户","66666666","QAQ","有内味了","真实","真香","空降成功","我从未见过如此厚颜无耻之人","可怜你帅不过坂本大佬","啊，那个郭德纲","鱼，好大的鱼，虎纹鲨鱼","表白字幕君","表白科普君","卧槽","正片开始","颜表立","弹幕护体","优雅","标准结局","注入灵魂","名场面","妙啊","破防了"];
-            var div = document.createElement("div");
-            // 在danmu数组中随机选取一条弹幕
-            div.innerText = danmu[Math.floor(Math.random() * danmu.length)];
-            div.id = id1;
-            return div;
+        function createdanmu() {
+            danmu=["2333333","哈哈哈哈哈哈哈","开幕雷击","前方高能","下次一定","草","禁止套娃","爷青回","双厨狂喜","泪目","逮虾户","66666666","QAQ","有内味了","真实","真香","空降成功","我从未见过如此厚颜无耻之人","可怜你帅不过坂本大佬","啊，那个郭德纲","鱼，好大的鱼，虎纹鲨鱼","表白字幕君","表白科普君","卧槽","正片开始","颜表立","弹幕护体","优雅","标准结局","注入灵魂","名场面","妙啊","破防了","你所热爱的，就是你的生活"];
+            random_danmu=danmu[Math.floor(Math.random()*danmu.length)];
+            json1 = {
+                "text": random_danmu,
+                "color": "#ffffff",
+                "size": "1",
+                "position": "0",
+                "time": $('#danmu').data("nowTime")+1
+            };
+            return json1;
         }
-        // 放置弹幕div
-        function putDiv(div) {
-            document.body.appendChild(div);
+        // 生成弹幕
+        function add(){
+            console.log("add");
+            var dm=createdanmu()
+            console.log(dm);
+            $("#danmu").danmu("addDanmu",dm)
         }
-        for (var i = 1; i <= 100; i++) {
-            var div = createDiv("dm" + i);
-            putDiv(div);
-        }
+        //运行
+        $("#danmu").danmu({
+            height: window.innerHeight-1,   //弹幕区域高度
+            width: window.innerWidth,   //弹幕区域宽度
+            zindex :-1,   //弹幕区域z-index属性
+            speed:9000,      //滚动弹幕的默认速度，这是数值值得是弹幕滚过每672像素所需要的时间（毫秒）
+            sumTime:65565,   //弹幕流的总时间
+            danmuLoop:false,   //是否循环播放弹幕
+            defaultFontColor:"#FFFFFF",   //弹幕的默认颜色
+            fontSizeSmall:16,     //小弹幕的字号大小
+            FontSizeBig:24,       //大弹幕的字号大小
+            opacity:"0.6",			//默认弹幕透明度
+            topBottonDanmuTime:6000,   // 顶部底部弹幕持续时间（毫秒）
+            SubtitleProtection:false,     //是否字幕保护
+            positionOptimize:false,         //是否位置优化，位置优化是指像AB站那样弹幕主要漂浮于区域上半部分
+
+            maxCountInScreen: 1000,   //屏幕上的最大的显示弹幕数目,弹幕数量过多时,优先加载最新的。
+            maxCountPerSec: 1000      //每分秒钟最多的弹幕数目,弹幕数量过多时,优先加载最新的。
+        });
+        $("#danmu").danmu("danmuStart");
+        setInterval(add,101);
     </script>
     
 </body>
