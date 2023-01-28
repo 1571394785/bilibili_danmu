@@ -44,11 +44,25 @@ shitty code ┗┛┗┛  ┗┛┗┛
             margin: 0;
             padding: 0;
         }
-
+        #head{
+        width: 50%;
+        height: 55%;;
+        background-color: rgb(0, 0, 0);
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        opacity: 0.5;
+        top: 7%;
+        left: 25%;
+        z-index: -1;
+        /* 圆角 */
+        border-radius: 20px;
+    }
 
     </style>
 </head>
 <body>
+    <div id="head"></div>
     <div id="danmu"></div>
     <h1>哔哩哔哩弹幕姬</h1>
     <div class="js">这软件儿可以把B站弹幕塞进任何视频观看</div>
@@ -82,8 +96,8 @@ shitty code ┗┛┗┛  ┗┛┗┛
         $("#danmu").danmu({
             height: window.innerHeight-1,   //弹幕区域高度
             width: window.innerWidth,   //弹幕区域宽度
-            zindex :-1,   //弹幕区域z-index属性
-            speed:9000,      //滚动弹幕的默认速度，这是数值值得是弹幕滚过每672像素所需要的时间（毫秒）
+            zindex :-2,   //弹幕区域z-index属性
+            speed:9000,      //滚动弹幕的默认速度，这是数值是弹幕滚过每672像素所需要的时间（毫秒）
             sumTime:65565,   //弹幕流的总时间
             danmuLoop:false,   //是否循环播放弹幕
             defaultFontColor:"#FFFFFF",   //弹幕的默认颜色
@@ -93,7 +107,6 @@ shitty code ┗┛┗┛  ┗┛┗┛
             topBottonDanmuTime:6000,   // 顶部底部弹幕持续时间（毫秒）
             SubtitleProtection:false,     //是否字幕保护
             positionOptimize:false,         //是否位置优化，位置优化是指像AB站那样弹幕主要漂浮于区域上半部分
-
             maxCountInScreen: 1000,   //屏幕上的最大的显示弹幕数目,弹幕数量过多时,优先加载最新的。
             maxCountPerSec: 1000      //每分秒钟最多的弹幕数目,弹幕数量过多时,优先加载最新的。
         });
