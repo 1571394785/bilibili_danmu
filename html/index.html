@@ -33,40 +33,34 @@ shitty code ┗┛┗┛  ┗┛┗┛
             font-size: 20px;
             margin-top: 0px;
         }
+
     </style>
 </head>
 <body>
     <h1>哔哩哔哩弹幕姬</h1>
     <div id="js1">这软件儿可以把B站弹幕塞进任何视频观看</div>
     <div id="js2">（目前智齿本地视频）</div>
-    <!-- 生成一段从右向左运动的字 -->
     <script>
-        var js1 = document.getElementById("js1");
-        var js2 = document.getElementById("js2");
-        var js1_width = js1.offsetWidth;
-        var js2_width = js2.offsetWidth;
-        var js1_left = js1.offsetLeft;
-        var js2_left = js2.offsetLeft;
-        var js1_right = js1_left + js1_width;
-        var js2_right = js2_left + js2_width;
-        var js1_move = js1_right;
-        var js2_move = js2_right;
-        var js1_move_speed = 1;
-        var js2_move_speed = 1;
-        var js1_move_interval = setInterval(function() {
-            js1_move -= js1_move_speed;
-            js1.style.left = js1_move + "px";
-            if (js1_move <= -js1_width) {
-                js1_move = js1_right;
-            }
-        }, 10);
-        var js2_move_interval = setInterval(function() {
-            js2_move -= js2_move_speed;
-            js2.style.left = js2_move + "px";
-            if (js2_move <= -js2_width) {
-                js2_move = js2_right;
-            }
-        }, 10);
+        // 生成弹幕div
+        function createDiv(id1) {
+            danmu=["2333333","哈哈哈哈哈哈哈","开幕雷击","前方高能","下次一定","草","禁止套娃","爷青回","双厨狂喜","泪目","逮虾户","66666666","QAQ","有内味了","真实","真香","空降成功","我从未见过如此厚颜无耻之人","可怜你帅不过坂本大佬","啊，那个郭德纲","鱼，好大的鱼，虎纹鲨鱼","表白字幕君","表白科普君","卧槽","正片开始","颜表立","弹幕护体","优雅","标准结局","注入灵魂","名场面","妙啊","破防了"];
+            var div = document.createElement("div");
+            // 在danmu数组中随机选取一条弹幕
+            div.innerText = danmu[Math.floor(Math.random() * danmu.length)];
+            div.id = id1;
+            return div;
+        }
+        // 放置弹幕div
+        function putDiv(div) {
+            document.body.appendChild(div);
+        }
+        for (var i = 1; i <= 100; i++) {
+            var div = createDiv("dm" + i);
+            putDiv(div);
+        }
     </script>
+    
 </body>
 </html>
+
+    
