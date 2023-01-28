@@ -22,19 +22,23 @@ shitty code ┗┛┗┛  ┗┛┗┛
             font-family: "inherit";
             text-align: center;
             margin: 0;
+            user-select: none;
         }
         h1 {
             font-size: 100px;
             font-weight: bold;
             margin-top: 100px;
+            text-shadow: 0 0 5px #ffffff;
+            transition: 0.5s;
         }
-        #js1 {
-            font-size: 20px;
-            margin-top: 50px;
+        h1:hover {
+            color: rgba(255, 255, 255, 0.5);
+            -webkit-text-stroke: 1.5px rgb(0, 0, 0);
         }
-        #js2 {
-            font-size: 20px;
-            margin-top: 0px;
+        .js {
+            font-size: 30px;
+            font-weight: bold;
+            text-shadow: 0 0 2px #ffffff;
         }
         #danmu{
             margin: 0;
@@ -47,8 +51,8 @@ shitty code ┗┛┗┛  ┗┛┗┛
 <body>
     <div id="danmu"></div>
     <h1>哔哩哔哩弹幕姬</h1>
-    <div id="js1">这软件儿可以把B站弹幕塞进任何视频观看</div>
-    <div id="js2">（目前智齿本地视频）</div>
+    <div class="js">这软件儿可以把B站弹幕塞进任何视频观看</div>
+    <div class="js">（目前智齿本地视频）</div>
     <script>
         // 生成弹幕div
         function createdanmu() {
