@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Python UI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="input" placeholder="Enter your code here" value="123"/>
+        <button id="run" onclick="run()">Run</button>
+    </div>
+</body>
+<script>
+    // 和QT交互的函数
+    function run() {
+        var input = document.getElementById("input").value;
+        return input;
+    }
+</script>
+</html>

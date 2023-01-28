@@ -1,21 +1,30 @@
-import PyQt5
-import PyQt5.uic
-import os
-def loadUiType(uiFile):
-    """
-    Pyside lacks the "loadUiType" command, so we have to convert the ui
-    file to py code in-memory first and then execute it in a special frame
-    to retrieve the form_class.
-    """
-    parsed = PyQt5.uic.parseUi(uiFile)
-    form_class = parsed.find('class').text
-    with open(uiFile, 'r') as f:
-        o = compile(f.read(), uiFile, 'exec')
-        frame = {}
-        exec(o, frame)
-        #Fetch the base_class and form class based on their type in the xml from designer
-        form_class = frame['Ui_%s'%form_class]
-        base_class = eval('PyQt5.QtWidgets.%s'%parsed.find('widget').attrib['class'])
-    return form_class, base_class
-os.chdir('python')
-print(os.path('start.py'))
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWebEngineWidgets import *
+import start,time
+def js_callback(result):
+    print(result)
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("哔哩哔哩弹幕姬")
+        self.setGeometry(100, 100, 800, 600)
+        self.browser = QWebEngineView()
+        self.button=QPushButton('搜索',self)
+        html = open('python/ui/index.html', 'r', encoding='utf-8').read()
+        
+        js_string='''
+        
+        run();
+        '''
+        #等待加载完毕
+        self.browser.setHtml(html)
+        self.browser.loadFinished.connect(lambda: self.browser.page().runJavaScript(js_string, js_callback))
+        
+        self.setCentralWidget(self.browser)
+app = QApplication([])
+win = MainWindow()
+win.show()
+app.exec_()
