@@ -21,48 +21,79 @@ shitty code ┗┛┗┛  ┗┛┗┛
             background-color: #fb7299;
             color: #ffffff;
             font-family: "inherit";
-            text-align: center;
             margin: 0;
             user-select: none;
         }
         h1 {
-            font-size: 100px;
+            font-size: 10vmin;
             font-weight: bold;
             margin-top: 10px;
             text-shadow: 0 0 5px #ffffff;
             transition: 0.5s;
+            text-align: center;
         }
         h1:hover {
             color: rgba(255, 255, 255, 0.5);
             -webkit-text-stroke: 1.5px rgb(0, 0, 0);
         }
         .js {
-            font-size: 30px;
+            font-size: 7vmin;
             font-weight: bold;
             text-shadow: 0 0 2px #ffffff;
+            text-align: center;
         }
         #danmu{
             margin: 0;
             padding: 0;
         }
         #head{
-        width: max-content;
-        height: auto;
-        background-color: rgba(0, 0, 0,0.2);
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-        padding: 20px;
-        position: absolute;
-        top: 7%;
-        left: 0%;
-        right: 0%;
-        margin: auto;
-        z-index: -1;
-        /* 圆角 */
-        border-radius: 20px;
-        transition: all 0.2s;
-        perspective: 500px;
-        cursor: pointer;
-    }
+            width: max-content;
+            height: auto;
+            background-color: rgba(0, 0, 0,0.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            position: absolute;
+            top: 7%;
+            left: 0%;
+            right: 0%;
+            margin: auto;
+            z-index: -1;
+            /* 圆角 */
+            border-radius: 20px;
+            transition: all 0.2s;
+            perspective: 500px;
+            cursor: pointer;
+        }
+        #dld{
+            width: 100px;
+            height: 50px;
+            background-color: #00AEEC;
+            color: #ffffff;
+            border: 0;
+            border-radius: 10px;
+            margin: 0;
+            cursor: pointer;
+            font-size: 20px; 
+            font-weight: bold;
+            bottom:10%;
+            position:absolute;
+            left:50%;
+            transform:translateX(-50%);
+            transition: 0.25s;
+        }
+        #dld:hover{
+            background-color: #00AEEC;
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 20vmin;
+            }
+            .js {
+                font-size: 15vmin;
+            }
+        }
     </style>
 </head>
 <body>
@@ -72,9 +103,8 @@ shitty code ┗┛┗┛  ┗┛┗┛
         <div class="js">（目前智齿本地视频）</div>
     </div>
     <div id="danmu"></div>
-    <!-- 生成按钮 -->
-    <div id="button" style="margin-top: 50px;">
-        <button id="start" style="font-size: 20px; font-weight: bold; background-color: #00AEEC; color: #ffffff; border: 0; border-radius: 10px; padding: 10px 20px; margin: 0 10px; cursor: pointer;">下载</button>
+    <!-- 按钮 -->
+    <button id="dld">下载</button>
     <script>
         //计算鼠标在#head上的位置
         $('#head').mousemove(function (e) {
