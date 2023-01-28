@@ -1,21 +1,22 @@
-import PyQt5
-import PyQt5.uic
-import os
-def loadUiType(uiFile):
-    """
-    Pyside lacks the "loadUiType" command, so we have to convert the ui
-    file to py code in-memory first and then execute it in a special frame
-    to retrieve the form_class.
-    """
-    parsed = PyQt5.uic.parseUi(uiFile)
-    form_class = parsed.find('class').text
-    with open(uiFile, 'r') as f:
-        o = compile(f.read(), uiFile, 'exec')
-        frame = {}
-        exec(o, frame)
-        #Fetch the base_class and form class based on their type in the xml from designer
-        form_class = frame['Ui_%s'%form_class]
-        base_class = eval('PyQt5.QtWidgets.%s'%parsed.find('widget').attrib['class'])
-    return form_class, base_class
-os.chdir('python')
-print(os.path('start.py'))
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWebEngineWidgets import *
+def js_callback(result):
+    print(result)
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("PyQt5 WebEngine")
+        self.setGeometry(100, 100, 800, 600)
+        self.browser = QWebEngineView()
+        self.browser.load(QUrl("http://121.43.33.137"))
+        self.browser.page().runJavaScript("documet.getElementById('nav')", js_callback)
+        self.setCentralWidget(self.browser)
+    def bs(self):
+        return self.browser
+app = QApplication([])
+win = MainWindow()
+win.show()
+app.exec_()
