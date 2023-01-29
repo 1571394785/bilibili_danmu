@@ -4,9 +4,14 @@ class bilibili:
     def 通过epid取cid(epid):
         url = 'https://api.bilibili.com/pgc/view/web/season?ep_id={}'.format(epid)
         r = requests.get(url)
+        data={'cid':[],'title':[]}
         # result.episodes[?].cid
         for i in r.json()['result']['episodes']:
                 print(i['cid'], i['share_copy'])
+                data['cid'].append(i['cid'])
+                data['title'].append(i['share_copy'])
+        return str(data)
+
     def 通过seasonid取cid(seasonid):
         url = 'https://api.bilibili.com/pgc/view/web/season?season_id={}'.format(seasonid)
         r = requests.get(url)
