@@ -18,8 +18,8 @@ class Factorial(QObject):
     def getinfo(self, n):
         print(n)
         json1=json.loads(n)
-        start.bilibili.通过epid取cid(json1['name'])
-        return "hello"+n
+        data = start.bilibili.通过epid取cid(json1['name'])
+        return data
         
 class ShowHtml(QWebEngineView):
     def __init__(self):
