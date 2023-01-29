@@ -1,5 +1,6 @@
 import requests
 import xml.etree.ElementTree as ET
+import json
 class bilibili:
     def 通过epid取cid(epid):
         url = 'https://api.bilibili.com/pgc/view/web/season?ep_id={}'.format(epid)
@@ -10,7 +11,8 @@ class bilibili:
                 print(i['cid'], i['share_copy'])
                 data['cid'].append(i['cid'])
                 data['title'].append(i['share_copy'])
-        return str(data)
+        json1=json.dumps(data)
+        return json1
 
     def 通过seasonid取cid(seasonid):
         url = 'https://api.bilibili.com/pgc/view/web/season?season_id={}'.format(seasonid)
