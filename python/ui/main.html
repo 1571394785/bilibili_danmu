@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>主窗口</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mdui-v1.0.1/css/mdui.min.css">
+    <script src="mdui-v1.0.1/js/mdui.min.js"></script>
+    <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</head>
+<script language="javascript">
+    // 用于PyQt5代码返回值后调用
+    function callback(result) {
+        alert('计算结果:' + result);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // 这里面的channel就是PyQt5传递过来的channel对象，其中包含了可供调用的obj对象（一个Factorial类对象）
+        new QWebChannel(qt.webChannelTransport, function (channel) {
+            // 从channel中获取到我们注册到channel中的Factorial类对象
+            window.obj = channel.objects.obj;
+        });
+    });
+
+    function onFactorial() {
+        // 如果获取到了Factorial对象
+        if (window.obj) {
+            // 获取输入框中的数字
+            var n = "123"
+            // 调用Factorial类对象中的槽函数factorial(n),并且指定一个异步调用的callback函数，当factorial返回时
+            // 自动调用callback
+            window.obj.factorial(n, callback);
+        }
+    }
+</script>
+<style>
+    .fct {
+        
+    }
+</style>
+<body class="mdui-appbar-with-toolbar mdui-theme-primary-pink mdui-drawer-body-left">
+    <div class="mdui-appbar mdui-appbar-fixed"> <!--显示顶部应用栏-->
+        <div class="mdui-toolbar mdui-color-indigo mdui-color-theme">
+            <a mdui-drawer="{target: '#left-drawer'}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons" id="open-drawer">menu</i></a>
+            <a href="javascript:;" class="mdui-typo-headline">哔哩哔哩弹幕姬</a>
+            <div class="mdui-toolbar-spacer"></div>
+            
+        </div>
+    </div>
+    <div class="mdui-drawer mdui-shadow-24" id="left-drawer">
+        <ul class="mdui-list">
+            <li class="mdui-list-item mdui-ripple">访问官网</li>
+          </ul>
+    </div>
+    <div class="mdui-container">
+        <div class="fct mdui-col-xs-3 mdui-card">
+            <div class="mdui-card-header">
+                <div class="mdui-card-header-title">Title</div>
+                <div class="mdui-card-header-subtitle">Subtitle</div>
+              </div>
+        </div>
+      </div>
+
+</body>
+<script>
+    
+</script>
+</html>
