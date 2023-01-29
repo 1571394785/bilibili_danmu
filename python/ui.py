@@ -41,7 +41,9 @@ class DemoWin(QWidget):
         # 将窗口设置为动图大小
         self.resize(500, 200)
         self.browser = QWebEngineView()
-        url = os.getcwd() + r'\python\ui\index.html'
+        #返回当前脚本文件位置
+        u= os.path.dirname(os.path.realpath(__file__))
+        url = u+"/ui/index.html"
         print(url)
         # 加载test.html
         self.browser.load(QUrl.fromLocalFile(url))
