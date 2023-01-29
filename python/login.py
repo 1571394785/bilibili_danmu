@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout
 from PyQt5.QtWebChannel import QWebChannel
 import sys
 import os
+import start
+import json
 class Factorial(QObject):
     @pyqtSlot(str, result=str)
     def factorial(self, n):
@@ -11,6 +13,12 @@ class Factorial(QObject):
         url = u+"/ui/main.html"
         print(url)
         ex.changeURL(url)
+        return "hello"+n
+    @pyqtSlot(str, result=str)
+    def getinfo(self, n):
+        print(n)
+        json1=json.loads(n)
+        start.bilibili.通过epid取cid(json1['name'])
         return "hello"+n
         
 class ShowHtml(QWebEngineView):
@@ -30,6 +38,7 @@ class ShowHtml(QWebEngineView):
         self.browser.show()
     def changeURL(self, url):
         self.browser.load(QUrl.fromLocalFile(url))
+        channel.registerObject("obj", factorial)
 if __name__ == '__main__':
     channel = QWebChannel()
     factorial = Factorial()

@@ -6,13 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="mdui-v1.0.1/css/mdui.min.css">
+    <link rel="font" href="mdui-v1.0.1\fonts\roboto\Roboto-Regular.woff">
     <script src="mdui-v1.0.1/js/mdui.min.js"></script>
     <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
 </head>
 <script language="javascript">
     // 用于PyQt5代码返回值后调用
     function callback(result) {
-        alert('计算结果:' + result);
+        alert( result);
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -23,47 +24,105 @@
         });
     });
 
-    function onFactorial() {
+    function onFactorial(text) {
         // 如果获取到了Factorial对象
         if (window.obj) {
             // 获取输入框中的数字
             var n = "123"
             // 调用Factorial类对象中的槽函数factorial(n),并且指定一个异步调用的callback函数，当factorial返回时
             // 自动调用callback
-            window.obj.factorial(n, callback);
+            window.obj.getinfo(text, callback);
         }
     }
 </script>
 <style>
-    .fct {
-        
+    body {
+        font-family: '微软雅黑', sans-serif;
+    }
+    .mdui-card{
+        margin: 0 10px;
+    }
+    .mudi-cotainer{
+        /* 内部dom居中 */
+
     }
 </style>
+
 <body class="mdui-appbar-with-toolbar mdui-theme-primary-pink mdui-drawer-body-left">
-    <div class="mdui-appbar mdui-appbar-fixed"> <!--显示顶部应用栏-->
+    <!--显示顶部应用栏-->
+    <div class="mdui-appbar mdui-appbar-fixed"> 
         <div class="mdui-toolbar mdui-color-indigo mdui-color-theme">
-            <a mdui-drawer="{target: '#left-drawer'}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons" id="open-drawer">menu</i></a>
+            <a mdui-drawer="{target: '#left-drawer'}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons"
+                    id="open-drawer">menu</i></a>
             <a href="javascript:;" class="mdui-typo-headline">哔哩哔哩弹幕姬</a>
             <div class="mdui-toolbar-spacer"></div>
-            
+
         </div>
     </div>
+    <!--显示侧边栏-->
     <div class="mdui-drawer mdui-shadow-24" id="left-drawer">
         <ul class="mdui-list">
             <li class="mdui-list-item mdui-ripple">访问官网</li>
-          </ul>
+        </ul>
     </div>
-    <div class="mdui-container">
-        <div class="fct mdui-col-xs-3 mdui-card">
-            <div class="mdui-card-header">
-                <div class="mdui-card-header-title">Title</div>
-                <div class="mdui-card-header-subtitle">Subtitle</div>
-              </div>
+    <!--显示内容-->
+    <div class="mdui-container mdui-row mdui-row-gapless">
+        <!-- new1 -->
+        <div class="mdui-card mdui-col-xs-5 ">
+            <div class="mdui-card-media">
+                <img src="res/室内3.jpg" />
+                <div class="mdui-card-media-covered">
+                    <div class="mdui-card-primary">
+                        <div class="mdui-card-primary-title">第一步</div>
+                        <div class="mdui-card-primary-subtitle">获取番剧弹幕</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdui-card-actions">
+                
+                <button class="mdui-btn mdui-ripple mdui-shadow-3" mdui-dialog="{target: '#search'}">搜索番剧</button>
+            </div>
         </div>
-      </div>
+        <!-- new2 -->
+        <div class="mdui-card mdui-col-xs-5 ">
+            <div class="mdui-card-media">
+                <img src="res/室内3.jpg" />
+                <div class="mdui-card-media-covered">
+                    <div class="mdui-card-primary">
+                        <div class="mdui-card-primary-title">第二步</div>
+                        <div class="mdui-card-primary-subtitle">打开心爱的小网站</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdui-card-actions">
+                <button class="mdui-btn mdui-ripple mdui-shadow-3">输入网址</button>
+            </div>
+        </div>
+    </div>
+    <!-- 搜索番剧对话框 -->
+    <div class="mdui-dialog" id="search">
+        <div class="mdui-dialog-title">搜索番剧</div>
+        <div class="mdui-dialog-content">
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">番剧epid</label>
+                <input class="mdui-textfield-input" id="danmu_name" type="text" />
+            </div>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-cancel>取消</button>
+            <button class="mdui-btn mdui-ripple" mdui-dialog-confirm onclick="searchdanmu()">搜索</button>
+        </div>
 
+    </div>
 </body>
 <script>
-    
+    function searchdanmu() {
+        var text = document.getElementById("danmu_name").value;
+        json1={
+            "name":text,"type":"search"
+        }
+        onFactorial(JSON.stringify(json1));
+    }
 </script>
+
 </html>
