@@ -24,7 +24,7 @@
         for (var i = 0; i < json['title'].length; i++) {
 
             //在内容中加入番剧
-            var li = '<li class="mdui-list-item mdui-ripple" onclick=show_snackbar("123")>' + json['title'][i] + '</li>'
+            var li = '<li class="mdui-list-item mdui-ripple" onclick=download("'+String(json['title'][i]).replace(" ","")+'","'+json['cid'][i]+'")>' + json['title'][i] + '</li>';
             resultDom.innerHTML += li;
         }
         instance.handleUpdate();
@@ -48,6 +48,9 @@
             // 自动调用callback
             window.obj.getinfo(text, callback);
         }
+    }
+    function download1(text){
+        window.obj.downloadmsg(text);
     }
 </script>
 <style>
@@ -90,9 +93,11 @@
                     </div>
                 </div>
             </div>
-            <div class="mdui-card-actions">
-
+            <div class="mdui-card-actions" style="display: flex;">
                 <button class="mdui-btn mdui-ripple mdui-shadow-3" mdui-dialog="{target: '#search'}">搜索番剧</button>
+                <div style="align-self: center;" id="fanju_mingcheng">
+                    当前未选择番剧
+                </div>
             </div>
         </div>
         <!-- new2 -->
@@ -107,7 +112,7 @@
                 </div>
             </div>
             <div class="mdui-card-actions">
-                <button class="mdui-btn mdui-ripple mdui-shadow-3">输入网址</button>
+                <button class="mdui-btn mdui-ripple mdui-shadow-3" onclick="openwangzhan()">选择网站</button>
             </div>
         </div>
     </div>
@@ -130,19 +135,34 @@
         <div class="mdui-dialog-title">选择番剧</div>
         <div class="mdui-dialog-content">
             <div class="mdui-tab mdui-color-theme" mdui-tab>
-                <a href="#example1-tab1 " class="mdui-ripple mdui-tab-active">web</a>
-                <a href="#example1-tab2" class="mdui-ripple">shopping</a>
-                <a href="#example1-tab3" class="mdui-ripple">images</a>
+                <a href="#example1-tab1 " class="mdui-ripple mdui-tab-active">bilibili</a>
+                <a href="#example1-tab2" class="mdui-ripple">等待后续开发</a>
+                <a href="#example1-tab3" class="mdui-ripple">等待后续开发</a>
             </div>
             <div id="example1-tab1" class="mdui-p-a-2">
                 <ul class="mdui-list" id="result">
-
-                    <li class="mdui-list-item mdui-ripple">Starred</li>
-                    <li class="mdui-list-item mdui-ripple">Send mail</li>
                 </ul>
             </div>
             <div id="example1-tab2" class="mdui-p-a-2">shopping content</div>
             <div id="example1-tab3" class="mdui-p-a-2">images content</div>
+        </div>
+    </div>
+    <!--选择网站对话框-->
+    <div class="mdui-dialog" id="wangzhan">
+        <div class="mdui-dialog-title">选择网站</div>
+        <div class="mdui-dialog-content">
+            <ul class="mdui-list" id="result1">
+                <li class="mdui-list-item mdui-ripple">
+                    樱花动漫
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    风车动漫
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    本地视频
+                </li>
+                <input class="mdui-textfield-input" id="wangzhi" type="text" placeholder="自定义网站"/>
+            </ul>
         </div>
     </div>
 </body>
@@ -155,6 +175,7 @@
         onFactorial(JSON.stringify(json1));
         // 打开番剧选择对话框
         var instance = new mdui.Dialog('#example-4');
+        window.instance = instance;
         instance.open();
     }
     function show_snackbar(text) {
@@ -162,7 +183,25 @@
             message: text
         });
     }
+    function download(text,cid)
+    {
+        // 关闭对话框
+        window.instance.close();
+        json1 = {
+            "name": text, "type": "download","cid":cid
+        }
+        
+        // 修改fanju_mingcheng
+        document.getElementById("fanju_mingcheng").innerHTML = text;
+        download1(JSON.stringify(json1));
+        show_snackbar("下载成功");
+    }
     show_snackbar("欢迎使用哔哩哔哩弹幕姬");
+    function openwangzhan() {
+        var instance = new mdui.Dialog('#wangzhan');
+        window.instance = instance;
+        instance.open();
+    }
 </script>
 
 </html>

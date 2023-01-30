@@ -6,6 +6,7 @@ import sys
 import os
 import start
 import json
+import threading
 class Factorial(QObject):
     @pyqtSlot(str, result=str)
     def factorial(self, n):
@@ -18,8 +19,18 @@ class Factorial(QObject):
     def getinfo(self, n):
         print(n)
         json1=json.loads(n)
-        data = start.bilibili.通过epid取cid(json1['name'])
+        #if json1 type is search
+        if json1['type'] == 'search':
+            data = start.bilibili.通过epid取cid(json1['name'])
         return data
+    @pyqtSlot(str, result=str)
+    def downloadmsg(self, n):
+        #if json1 type is download
+        json1=json.loads(n)
+        
+        print(json1['cid'])
+        threading.Thread(target=start.bilibili.通过cid下载弹幕,args=(json1['cid'],)).start()
+        return "hello"
         
 class ShowHtml(QWebEngineView):
     def __init__(self):
