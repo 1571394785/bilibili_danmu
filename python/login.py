@@ -9,7 +9,7 @@ import json
 class Factorial(QObject):
     @pyqtSlot(str, result=str)
     def factorial(self, n):
-        u= os.path.dirname(os.path.realpath(__file__))
+        
         url = u+"/ui/main.html"
         print(url)
         ex.changeURL(url)
@@ -28,7 +28,7 @@ class ShowHtml(QWebEngineView):
     def initUI(self):
         self.resize(500, 200)
         self.browser = QWebEngineView()
-        u= os.path.dirname(os.path.realpath(__file__))
+        
         url = u+"/ui/index.html"
         print(url)
         self.browser.load(QUrl.fromLocalFile(url))
@@ -40,6 +40,11 @@ class ShowHtml(QWebEngineView):
         self.browser.load(QUrl.fromLocalFile(url))
         channel.registerObject("obj", factorial)
 if __name__ == '__main__':
+    #pyinstaller 修复 u位置
+    if getattr(sys, 'frozen', False):
+        u = os.path.dirname(sys.executable)
+    else:
+        u = os.path.dirname(os.path.realpath(__file__))
     channel = QWebChannel()
     factorial = Factorial()
     channel.registerObject("obj", factorial)
