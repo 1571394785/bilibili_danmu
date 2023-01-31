@@ -3,8 +3,20 @@
     "description": "Base Level Extension",
     "version": "1.0",
     "manifest_version": 3,
+    "permissions": [
+        "activeTab",
+        "storage",
+        "webRequest"
+    ],
     "action": {
         "default_popup": "popup.html",
         "default_title": "Hello Extensions"
-    }
+    },
+    "background": {
+        "service_worker": "js/background.js"
+    },
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ]
 }

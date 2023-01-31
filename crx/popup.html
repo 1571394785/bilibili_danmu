@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>哔哩哔哩弹幕姬</title>
 </head>
-<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css"/>
+<link rel="stylesheet" href="css\mdui-v1.0.1\css\mdui.min.css"/>
+<script src="css\mdui-v1.0.1\js\mdui.min.js"></script>
 <style>
     body{
         margin: 0;
@@ -36,17 +37,36 @@
         left: 0;
     }
     h1{
-        position: absolute;
-        margin: 0;
-        left: 50%;
-        top: 0;
+        text-align: center;
+        width: max-content;
+        color: rgb(255,85,140);
+        margin-left: 15px;
+        float: left;
+    }
+    .cs_btn{
+        /* 删除背景 */
+        background: none;
+        margin-right: 10px;
+        margin-top: 13px;
+        width: 120px;
+        height: 40px;
+    }
+    #btn_container{
+        float: right;
     }
 </style>
 <body>
     <div class="container">
         <div id="menu-bar">
             <i class="mdui-icon material-icons" id="menu">menu</i>
-            <h1>哔哩哔哩弹幕姬</h1>
+        </div>
+        <h1>哔哩哔哩<br>弹幕姬</h1>
+        <div id="btn_container">
+            <button class="mdui-ripple cs_btn" id="daoru">导入弹幕</button>
+            <br>
+            <button class="mdui-ripple cs_btn" id="jiazai">加载弹幕</button>
         </div>
     </div>
+</body>
+<script src="js\userJS.js"></script>
 </html>
