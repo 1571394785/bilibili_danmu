@@ -23,8 +23,8 @@ class Qweb(QWebEngineView):
         self.show()
     # 点击链接时，跳转到新的链接
     def createWindow(self, QWebEnginePage_WebWindowType):
-        web = Qweb()
-        return web
+        print("createWindow")
+        return self
 
 class Ui_MainWindow(object):
     def setupUi(self):
@@ -39,6 +39,8 @@ class Ui_MainWindow(object):
         self.lineEdit = QLineEdit()
         #定义一个按钮
         self.pushButton = QPushButton("按钮")
+        #定义按钮的点击事件
+        self.pushButton.clicked.connect(self.click)
         #定义一个水平布局
         self.hbox = QHBoxLayout()
         #设置水平布局的间距和边距
@@ -55,7 +57,7 @@ class Ui_MainWindow(object):
         #把水平布局添加到垂直布局中
         self.vbox.addLayout(self.hbox)
         #定义一个浏览器
-        self.web = QWebEngineView()
+        self.web = Qweb()
         self.web.load(QUrl("https://www.baidu.com"))
         #把浏览器添加到垂直布局中
         self.vbox.addWidget(self.web)
@@ -68,5 +70,8 @@ class Ui_MainWindow(object):
         self.lineEdit.setText(url.toString())
         self.lineEdit.setCursorPosition(0)
         self.web.load(url)
+    def click(self):
+        url = self.lineEdit.text()
+        self.web.load(QUrl(url))
 ui=Ui_MainWindow()
 ui.setupUi()
