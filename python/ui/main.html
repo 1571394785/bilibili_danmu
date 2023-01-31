@@ -22,15 +22,12 @@
         //解析返回的json
         var json = JSON.parse(result);
         for (var i = 0; i < json['title'].length; i++) {
-
             //在内容中加入番剧
             var li = '<li class="mdui-list-item mdui-ripple" onclick=download("'+String(json['title'][i]).replace(" ","")+'","'+json['cid'][i]+'")>' + json['title'][i] + '</li>';
             resultDom.innerHTML += li;
         }
         instance.handleUpdate();
-
     }
-
     document.addEventListener("DOMContentLoaded", function () {
         // 这里面的channel就是PyQt5传递过来的channel对象，其中包含了可供调用的obj对象（一个Factorial类对象）
         new QWebChannel(qt.webChannelTransport, function (channel) {
@@ -38,7 +35,6 @@
             window.obj = channel.objects.obj;
         });
     });
-
     function onFactorial(text) {
         // 如果获取到了Factorial对象
         if (window.obj) {
@@ -71,7 +67,6 @@
                     id="open-drawer">menu</i></a>
             <a href="javascript:;" class="mdui-typo-headline">哔哩哔哩弹幕姬</a>
             <div class="mdui-toolbar-spacer"></div>
-
         </div>
     </div>
     <!--显示侧边栏-->
@@ -96,7 +91,7 @@
             <div class="mdui-card-actions" style="display: flex;">
                 <button class="mdui-btn mdui-ripple mdui-shadow-3" mdui-dialog="{target: '#search'}">搜索番剧</button>
                 <div style="align-self: center;" id="fanju_mingcheng">
-                    当前未选择番剧
+                    当前未选择番剧喵~
                 </div>
             </div>
         </div>
@@ -136,8 +131,8 @@
         <div class="mdui-dialog-content">
             <div class="mdui-tab mdui-color-theme" mdui-tab>
                 <a href="#example1-tab1 " class="mdui-ripple mdui-tab-active">bilibili</a>
-                <a href="#example1-tab2" class="mdui-ripple">等待后续开发</a>
-                <a href="#example1-tab3" class="mdui-ripple">等待后续开发</a>
+                <a href="#example1-tab2" class="mdui-ripple">等待后续开发喵~</a>
+                <a href="#example1-tab3" class="mdui-ripple">等待后续开发喵~</a>
             </div>
             <div id="example1-tab1" class="mdui-p-a-2">
                 <ul class="mdui-list" id="result">
@@ -190,8 +185,7 @@
         json1 = {
             "name": text, "type": "download","cid":cid
         }
-        
-        // 修改fanju_mingcheng
+                // 修改fanju_mingcheng
         document.getElementById("fanju_mingcheng").innerHTML = text;
         download1(JSON.stringify(json1));
         show_snackbar("下载成功");
