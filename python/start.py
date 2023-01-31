@@ -29,6 +29,7 @@ class bilibili:
         r = requests.get(url)
         with open('python/temp/1.xml', 'w', encoding='utf-8') as f:
             f.write(r.content.decode('utf-8'))
+        # 皿洋草到此一游喵~
 class danmu(object):
     def __init__(self):
         self.data={'info':0,'text':[],'attr':[]}#弹幕数据

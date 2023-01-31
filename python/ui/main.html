@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
+<!--您好，感谢您浏览这一串大便一样的代码
+                  ╭━━━━╮
+          ╭╮╭━━━━━┫┃▋▋━▅
+          ┃╰┫     ┃┃    ╰-┫
+          ╰━┫     ╰╯╰┳━━━━╯
+          / ┃┏┳┳━━┓┏┳┫
+shitty code ┗┛┗┛  ┗┛┗┛-->
 <head>
     <title>主窗口</title>
     <meta charset="UTF-8">
@@ -60,7 +66,7 @@
 </style>
 
 <body class="mdui-appbar-with-toolbar mdui-theme-primary-pink mdui-drawer-body-left">
-    <!--显示顶部应用栏-->
+    <!--顶部栏-->
     <div class="mdui-appbar mdui-appbar-fixed">
         <div class="mdui-toolbar mdui-color-indigo mdui-color-theme">
             <a mdui-drawer="{target: '#left-drawer'}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons"
@@ -77,7 +83,7 @@
     </div>
     <!--显示内容-->
     <div class="mdui-container mdui-row mdui-row-gapless">
-        <!-- new1 -->
+        <!-- 第一步 -->
         <div class="mdui-card mdui-col-xs-5 ">
             <div class="mdui-card-media">
                 <img src="res/室内3.jpg" />
@@ -91,11 +97,11 @@
             <div class="mdui-card-actions" style="display: flex;">
                 <button class="mdui-btn mdui-ripple mdui-shadow-3" mdui-dialog="{target: '#search'}">搜索番剧</button>
                 <div style="align-self: center;" id="fanju_mingcheng">
-                    当前未选择番剧喵~
+                    QAQ当前未选择番剧喵~
                 </div>
             </div>
         </div>
-        <!-- new2 -->
+        <!-- 第二步 -->
         <div class="mdui-card mdui-col-xs-5 ">
             <div class="mdui-card-media">
                 <img src="res/室内3.jpg" />
@@ -131,15 +137,15 @@
         <div class="mdui-dialog-content">
             <div class="mdui-tab mdui-color-theme" mdui-tab>
                 <a href="#example1-tab1 " class="mdui-ripple mdui-tab-active">bilibili</a>
-                <a href="#example1-tab2" class="mdui-ripple">等待后续开发喵~</a>
-                <a href="#example1-tab3" class="mdui-ripple">等待后续开发喵~</a>
+                <a href="#example1-tab2" class="mdui-ripple">未开发</a>
+                <a href="#example1-tab3" class="mdui-ripple">也未开发</a>
             </div>
             <div id="example1-tab1" class="mdui-p-a-2">
                 <ul class="mdui-list" id="result">
                 </ul>
             </div>
-            <div id="example1-tab2" class="mdui-p-a-2">shopping content</div>
-            <div id="example1-tab3" class="mdui-p-a-2">images content</div>
+            <div id="example1-tab2" class="mdui-p-a-2">等待后续开发喵~</div>
+            <div id="example1-tab3" class="mdui-p-a-2">等待更后续的开发喵~</div>
         </div>
     </div>
     <!--选择网站对话框-->
@@ -185,11 +191,12 @@
         json1 = {
             "name": text, "type": "download","cid":cid
         }
-                // 修改fanju_mingcheng
+        // 修改fanju_mingcheng
         document.getElementById("fanju_mingcheng").innerHTML = text;
         download1(JSON.stringify(json1));
         show_snackbar("下载成功");
     }
+    // 进入时底部提示栏
     show_snackbar("欢迎使用哔哩哔哩弹幕姬");
     function openwangzhan() {
         var instance = new mdui.Dialog('#wangzhan');

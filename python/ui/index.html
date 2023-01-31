@@ -36,32 +36,23 @@
     }
 </style>
 <body>
+    <!-- 条款页面 -->
     <div>
         <h1>用户使用条款</h1>
         <p>1. 本软件仅供学习交流使用，不得用于商业用途喵~</p>
         <p>2. 宣传时请注明出处喵~</p>
         <input type="checkbox" id="agree" name="agree" value="agree"/>我已阅读并同意以上条款
         <br/>
-        <button id="btn" onclick="onFactorial()">同意</button>
-        <!-- 未同意则退出软件 -->
+        <button id="btn" onclick="onFactorial()">同意喵~</button>
         <script>
             var btn = document.getElementById("btn");
             btn.onclick = function(){
                 if(document.getElementById("agree").checked){
-                    window.close();
-                }else{
-                    alert("请同意用户使用条款");
-                }
-            }
-        </script>
-        <!-- 同意则进入 -->
-        <script>
-            var btn = document.getElementById("btn");
-            btn.onclick = function(){
-                if(document.getElementById("agree").checked){
+                    // 同意则进入主页面
                     window.location.href = "main.html";
                 }else{
-                    alert("请同意用户使用条款");
+                    // 未同意则弹出提示
+                    alert("请同意用户使用条款喵~");
                 }
             }
         </script>
