@@ -4,8 +4,7 @@
     "version": "1.0",
     "manifest_version": 3,
     "permissions": [
-        "activeTab",
-        "storage",
+        "tabs",
         "webRequest"
     ],
     "action": {
