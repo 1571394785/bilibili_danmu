@@ -17,5 +17,20 @@
     "host_permissions": [
         "http://*/*",
         "https://*/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "js/jquery-1.11.1.min.js",
+                "js/jquery.danmu.min.js",
+                "js/content.js"
+            ],
+            "run_at": "document_end",
+            "all_frames": true
+        }
     ]
 }

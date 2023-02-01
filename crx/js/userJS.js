@@ -1,10 +1,12 @@
 var btn = document.getElementById('menu');
 var btn1 = document.getElementById('daoru');
 var btn2 = document.getElementById('jiazai');
-function printDOM(){
-    // 获取当前标签页的DOM
-    chrome.tabs.printDOM(function (dom) {
-        console.log(dom);
+function printDOM() {
+    //发送消息到content.js
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, { greeting: "hello" }, function (response) {
+            console.log(response.farewell);
+        });
     });
 }
 btn1.addEventListener('click', function () {
