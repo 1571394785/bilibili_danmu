@@ -22,8 +22,8 @@ function findDOM() {
         var div = window.div;
         if (dom.id == 'select') {
         } else {
-            div.style.top = dom.offsetTop + 'px';
-            div.style.left = dom.offsetLeft + 'px';
+            div.style.top = dom.getBoundingClientRect().top + 'px';
+            div.style.left = dom.getBoundingClientRect().left + 'px';
             div.style.width = dom.offsetWidth + 'px';
             div.style.height = dom.offsetHeight + 'px';
         }
@@ -70,8 +70,8 @@ function add(){
 function run(){
     
     $("#danmu").danmu({
-        height: window.select_dom.offsetHeight,
-        width: window.select_dom.offsetWidth,
+        height:window.select_dom.getBoundingClientRect().height+'px',
+        width:window.select_dom.getBoundingClientRect().width+'px',
         zindex :9999,   //弹幕区域z-index属性
         speed:9000,      //滚动弹幕的默认速度，这是数值是弹幕滚过每672像素所需要的时间（毫秒）
         sumTime:65565,   //弹幕流的总时间
@@ -87,10 +87,12 @@ function run(){
         maxCountPerSec: 1000      //每分秒钟最多的弹幕数目,弹幕数量过多时,优先加载最新的。
     });
     $("#danmu").danmu("danmuStart");
-    $("#danmu").css("left",window.select_dom.offsetLeft);
-    $("#danmu").css("top",window.select_dom.offsetTop);
+    $("#danmu").css("left",window.select_dom.getBoundingClientRect().left);
+    $("#danmu").css("top",window.select_dom.getBoundingClientRect().top+window.scrollY);
+    console.log(window.select_dom.getBoundingClientRect().top)
+    console.log(window.scrollY)
     $("#danmu").css("pointer-events","none");
-    setInterval(add,101);
+    setInterval(add,1000);
 }
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log(sender.tab ?
@@ -103,7 +105,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 // 新建一个div用以显示框选元素
 var div = document.createElement('div');
 div.id = 'select';
-div.style.position = 'absolute';
+div.style.position = 'fixed';
 div.style.top = '0';
 div.style.left = '0';
 div.style.border = '1px solid red';
