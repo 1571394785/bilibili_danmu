@@ -5,13 +5,17 @@ function getDOM() {
     return dom;
 }
 function findAllVideo() {
+    console.log('findAllVideo');
     var video = document.getElementsByTagName('video');
-    // 删除所有video标签
+    // 输出所有video标签的秒数
     for (var i = 0; i < video.length; i++) {
-        video[i].parentNode.removeChild(video[i]);
+        console.log(video[i].duration);
+        console.log(video[i].currentTime);
+        window.current_time = video[i].currentTime;
+        window.duration = video[i].duration;
+        window.current_video = video[i];
     }
-    console.log(video.length);
-    return video.length;
+    run(1);
 }
 function findDOM() {
     // 检测鼠标悬浮的元素
@@ -22,8 +26,8 @@ function findDOM() {
         var div = window.div;
         if (dom.id == 'select') {
         } else {
-            div.style.top = dom.offsetTop + 'px';
-            div.style.left = dom.offsetLeft + 'px';
+            div.style.top = dom.getBoundingClientRect().top + 'px';
+            div.style.left = dom.getBoundingClientRect().left + 'px';
             div.style.width = dom.offsetWidth + 'px';
             div.style.height = dom.offsetHeight + 'px';
         }
@@ -39,7 +43,7 @@ function findDOM() {
         $(document).unbind('click');
         // 移除监听鼠标移动事件
         $(document).unbind('mousemove');
-        run();
+        run(0);
     });
     
 }
@@ -67,11 +71,15 @@ function add(){
     $("#danmu").danmu("addDanmu",dm)
 }
 //运行弹幕
-function run(){
-    
+function run(flag=0){
+    if(flag==1){
+        var dom=window.current_video;
+    }else{
+        var dom=window.select_dom;
+    }
     $("#danmu").danmu({
-        height: window.select_dom.offsetHeight,
-        width: window.select_dom.offsetWidth,
+        height:dom.getBoundingClientRect().height+'px',
+        width:dom.getBoundingClientRect().width+'px',
         zindex :9999,   //弹幕区域z-index属性
         speed:9000,      //滚动弹幕的默认速度，这是数值是弹幕滚过每672像素所需要的时间（毫秒）
         sumTime:65565,   //弹幕流的总时间
@@ -87,23 +95,29 @@ function run(){
         maxCountPerSec: 1000      //每分秒钟最多的弹幕数目,弹幕数量过多时,优先加载最新的。
     });
     $("#danmu").danmu("danmuStart");
-    $("#danmu").css("left",window.select_dom.offsetLeft);
-    $("#danmu").css("top",window.select_dom.offsetTop);
+    $("#danmu").css("left",window.select_dom.getBoundingClientRect().left);
+    $("#danmu").css("top",window.select_dom.getBoundingClientRect().top+window.scrollY);
+    console.log(window.select_dom.getBoundingClientRect().top)
+    console.log(window.scrollY)
     $("#danmu").css("pointer-events","none");
-    setInterval(add,101);
+    setInterval(add,1000);
 }
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log(sender.tab ?
         "from a content script:" + sender.tab.url :
         "from the extension");
     if (request.greeting == "hello")
         findDOM();
-        sendResponse({ farewell: findAllVideo() });
+        sendResponse({ farewell: "run"});
+    if (request.greeting == "shibie")
+        findAllVideo();
+        sendResponse({ farewell: "shibie" });
 });
 // 新建一个div用以显示框选元素
 var div = document.createElement('div');
 div.id = 'select';
-div.style.position = 'absolute';
+div.style.position = 'fixed';
 div.style.top = '0';
 div.style.left = '0';
 div.style.border = '1px solid red';
@@ -118,5 +132,5 @@ window.div = div;
 var danmu = document.createElement('div');
 danmu.id = 'danmu';
 danmu.style.position = 'absolute';
-danmu.style.backgroundColor = 'rgba(100,100,100,0.3)';
+danmu.style.backgroundColor = 'rgba(100,255,100,0.8)';
 document.body.appendChild(danmu);
