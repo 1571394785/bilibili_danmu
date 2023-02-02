@@ -78,8 +78,8 @@ function run(flag=0){
         var dom=window.select_dom;
     }
     $("#danmu").danmu({
-        height:dom.getBoundingClientRect().height+'px',
-        width:dom.getBoundingClientRect().width+'px',
+        height: window.select_dom.offsetHeight,
+        width: window.select_dom.offsetWidth,
         zindex :9999,   //弹幕区域z-index属性
         speed:9000,      //滚动弹幕的默认速度，这是数值是弹幕滚过每672像素所需要的时间（毫秒）
         sumTime:65565,   //弹幕流的总时间
@@ -117,7 +117,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 // 新建一个div用以显示框选元素
 var div = document.createElement('div');
 div.id = 'select';
-div.style.position = 'fixed';
+div.style.position = 'absolute';
 div.style.top = '0';
 div.style.left = '0';
 div.style.border = '1px solid red';
