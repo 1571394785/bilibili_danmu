@@ -1,3 +1,18 @@
+class DanmuAnsis {
+    jiexi(xml1) {
+        var xml3=new DOMParser().parseFromString(xml1,"text/xml");
+        var danmu = xml3.getElementsByTagName('d');
+        var text = [];
+        var aDanmu = { text: "这是弹幕", color: "white", size: 1, position: 0, time: 2 };
+        for (var i = 0; i < danmu.length; i++) {
+            // 读取属性
+            var shuxing = danmu[i].getAttribute('p').split(',');
+            aDanmu = { "text": danmu[i].innerHTML, "color": shuxing[3], "size": 1, "position": 0, "time": parseInt(parseFloat(shuxing[0]) * 10) };
+            text.push(aDanmu);
+        }
+        return text;
+    }
+}
 // 接收消息
 function getDOM() {
     // 获取dom文本
@@ -77,6 +92,11 @@ function run(flag=0){
     }else{
         var dom=window.select_dom;
     }
+    chrome.storage.local.get(['danmu'], function (result) {
+        var danmu = result.danmu;
+        danmu = new DanmuAnsis().jiexi(danmu);
+        $("#danmu").danmu("addDanmu", danmu);
+    });
     $("#danmu").danmu({
         height: window.select_dom.offsetHeight,
         width: window.select_dom.offsetWidth,
