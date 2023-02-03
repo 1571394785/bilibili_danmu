@@ -1,6 +1,6 @@
 import requests
 import xml.etree.ElementTree as ET
-import json
+import json,os,sys
 class bilibili:
     def 通过epid取cid(epid):
         url = 'https://api.bilibili.com/pgc/view/web/season?ep_id={}'.format(epid)
@@ -25,9 +25,14 @@ class bilibili:
         r = requests.get(url)
         print(r.text)
     def 通过cid下载弹幕(cid):
+        if getattr(sys, 'frozen', False):
+            u = os.path.dirname(sys.executable)
+        else:
+            u = os.path.dirname(os.path.realpath(__file__))
         url = 'https://api.bilibili.com/x/v1/dm/list.so?oid={}'.format(cid)
         r = requests.get(url)
-        with open('python/temp/1.xml', 'w', encoding='utf-8') as f:
+        os.makedirs(u+'/temp', exist_ok=True)
+        with open(u+'/temp/1.xml', 'w', encoding='utf-8') as f:
             f.write(r.content.decode('utf-8'))
         # 皿洋草到此一游喵~
 class danmu(object):

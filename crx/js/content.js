@@ -120,7 +120,6 @@ function run(flag=0){
     console.log(window.select_dom.getBoundingClientRect().top)
     console.log(window.scrollY)
     $("#danmu").css("pointer-events","none");
-    setInterval(add,1000);
 }
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {

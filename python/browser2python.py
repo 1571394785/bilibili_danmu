@@ -1,4 +1,4 @@
-import sys,json,tkinter,threading
+import sys,json,tkinter,threading,os
 import http.server
 class RequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -22,7 +22,8 @@ class App:
         self.tk.mainloop()
     def send(self):
         global data1,status
-        with open("python/temp/1.xml","r",encoding='utf-8') as f:
+        print(u+"/temp/1.xml")
+        with open(u+"/temp/1.xml","r",encoding='utf-8') as f:
             data1=f.read()
         status="send"
     def quit(self):
@@ -41,6 +42,10 @@ def changestatus(status1):
 status = "wait"
 data1 = "data"
 if __name__ == '__main__':
+    if getattr(sys, 'frozen', False):
+        u = os.path.dirname(sys.executable)
+    else:
+        u = os.path.dirname(os.path.realpath(__file__))
     global trd
     trd = threading.Thread(target=start_server)
     trd.deamon = True

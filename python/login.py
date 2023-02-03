@@ -29,7 +29,7 @@ class Factorial(QObject):
         json1=json.loads(n)
         
         print(json1['cid'])
-        threading.Thread(target=start.bilibili.通过cid下载弹幕,args=(json1['cid'],)).start()
+        start.bilibili.通过cid下载弹幕(json1['cid'])
         return "hello"
         
 class ShowHtml(QWebEngineView):
