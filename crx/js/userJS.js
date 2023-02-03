@@ -2,6 +2,7 @@ var btn = document.getElementById('menu');
 var btn1 = document.getElementById('daoru');
 var btn2 = document.getElementById('jiazai');
 var btn3 = document.getElementById('shibie');
+var btn4 = document.getElementById('test');
 function printDOM() {
     //发送消息到content.js
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -30,6 +31,14 @@ btn2.addEventListener('click', function () {
 btn3.addEventListener('click', function () {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, { greeting: "shibie" }, function (response) {
+            console.log(response.farewell);
+        });
+    });
+    
+});
+btn4.addEventListener('click', function () {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, { greeting: "test" }, function (response) {
             console.log(response.farewell);
         });
     });
