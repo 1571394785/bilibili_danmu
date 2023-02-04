@@ -34,7 +34,14 @@ class bilibili:
         os.makedirs(u+'/temp', exist_ok=True)
         with open(u+'/temp/1.xml', 'w', encoding='utf-8') as f:
             f.write(r.content.decode('utf-8'))
-        # 皿洋草到此一游喵~
+class dandanplay():
+    def __init__(self):
+        print('初始化')
+    def 搜索番剧关键词(self,keyword):
+        url = 'https://api.dandanplay.net/api/v2/search/episodes?anime={}'.format(keyword)
+        r = requests.get(url)
+        return r.text
+    def
 class danmu(object):
     def __init__(self):
         self.data={'info':0,'text':[],'attr':[]}#弹幕数据
@@ -54,4 +61,5 @@ class danmu(object):
         json1={'text':self.data['text'][弹幕序号],'秒':分割后的弹幕属性[0],'弹幕模式':分割后的弹幕属性[1],'字体大小':分割后的弹幕属性[2],'颜色':分割后的弹幕属性[3],'发送时间':分割后的弹幕属性[4],'弹幕池':分割后的弹幕属性[5],'用户hash':分割后的弹幕属性[6],'rowID':分割后的弹幕属性[7]}
         return json1
 if __name__ == '__main__':
-    bilibili.通过cid下载弹幕(46590159)
+    dan1=dandanplay()
+    dan1.搜索番剧关键词('玉子市场')
