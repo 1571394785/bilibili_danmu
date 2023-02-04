@@ -41,7 +41,20 @@ class dandanplay():
         url = 'https://api.dandanplay.net/api/v2/search/episodes?anime={}'.format(keyword)
         r = requests.get(url)
         return r.text
-    def
+    def 解析番剧数据(self,text):
+        self.所有番剧信息={"array":[{"番剧名称":"玉子市场","集信息":[{"集名称":"01","集ID":10000}]}]}
+        # 先清空
+        self.所有番剧信息['array']=[]
+        try:
+            json1=json.loads(text)
+        except:
+            print('解析失败')
+            return False
+        for i in json1['animes']:
+            self.所有番剧信息['array'].append({'番剧名称':i['animeTitle'],'集信息':[]})
+            for j in i['episodes']:
+                self.所有番剧信息['array'][-1]['集信息'].append({'集名称':j['episodeTitle'],'集ID':j['episodeId']})
+        print(self.所有番剧信息)
 class danmu(object):
     def __init__(self):
         self.data={'info':0,'text':[],'attr':[]}#弹幕数据
@@ -62,4 +75,5 @@ class danmu(object):
         return json1
 if __name__ == '__main__':
     dan1=dandanplay()
-    dan1.搜索番剧关键词('玉子市场')
+    text=dan1.搜索番剧关键词('玉子')
+    dan1.解析番剧数据(text)
