@@ -34,7 +34,7 @@ class bilibili:
         os.makedirs(u+'/temp', exist_ok=True)
         with open(u+'/temp/1.xml', 'w', encoding='utf-8') as f:
             f.write(r.content.decode('utf-8'))
-class dandanplay():
+class dandanplay:
     def __init__(self):
         print('初始化')
     def 搜索番剧关键词(self,keyword):
@@ -54,7 +54,7 @@ class dandanplay():
             self.所有番剧信息['array'].append({'番剧名称':i['animeTitle'],'集信息':[]})
             for j in i['episodes']:
                 self.所有番剧信息['array'][-1]['集信息'].append({'集名称':j['episodeTitle'],'集ID':j['episodeId']})
-        print(self.所有番剧信息)
+        return self.所有番剧信息
 class danmu(object):
     def __init__(self):
         self.data={'info':0,'text':[],'attr':[]}#弹幕数据

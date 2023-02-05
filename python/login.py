@@ -21,7 +21,11 @@ class Factorial(QObject):
         json1=json.loads(n)
         #if json1 type is search
         if json1['type'] == 'search':
-            data = start.bilibili.通过epid取cid(json1['name'])
+            dandan=start.dandanplay()
+            data = dandan.搜索番剧关键词(json1['name'])
+            data=dandan.解析番剧数据(data)
+            data=json.dumps(data,ensure_ascii=False)
+            print(data)
         return data
     @pyqtSlot(str, result=str)
     def downloadmsg(self, n):
@@ -46,6 +50,7 @@ class ShowHtml(QWebEngineView):
         channel.registerObject("obj", factorial)
         self.browser.page().setWebChannel(channel)
         self.browser.setWindowTitle("哔哩哔哩弹幕姬")
+        self.browser.resize(1000, 800)
         self.browser.show()
     def changeURL(self, url):
         self.browser.load(QUrl.fromLocalFile(url))
