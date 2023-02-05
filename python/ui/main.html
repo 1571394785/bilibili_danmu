@@ -50,6 +50,7 @@ shitty code ┗┛┗┛  ┗┛┗┛-->
                 var newDom3 = document.createElement("li");
                 newDom3.setAttribute("class", "mdui-list-item mdui-ripple");
                 newDom3.innerHTML = json['array'][i]['集信息'][j]['集名称'];
+                newDom3.setAttribute("onclick", "download('" + json['array'][i]['集信息'][j]['集ID'] + "')");
                 newDom2.appendChild(newDom3);
             }
             // 添加到result dom中

@@ -31,9 +31,8 @@ class Factorial(QObject):
     def downloadmsg(self, n):
         #if json1 type is download
         json1=json.loads(n)
-        
-        print(json1['cid'])
-        start.bilibili.通过cid下载弹幕(json1['cid'])
+        print(json1)
+        start.dandanplay().下载弹幕(json1['name'])
         return "hello"
         
 class ShowHtml(QWebEngineView):

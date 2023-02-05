@@ -13,14 +13,14 @@ function printDOM() {
 }
 btn1.addEventListener('click', function () {
     //通讯到background.js
-    chrome.runtime.sendMessage({
-        greeting: "hello"
-    }, function (response) {
-        console.log(response.farewell);
-    });
+    // chrome.runtime.sendMessage({
+    //     greeting: "hello"
+    // }, function (response) {
+    //     console.log(response.farewell);
+    // });
     // 新建一个标签页
     chrome.tabs.create({
-        url: 'DanMu://123'
+        url: './ui/download.html'
     });
     console.log('daoru');
 });
@@ -34,6 +34,8 @@ btn3.addEventListener('click', function () {
             console.log(response.farewell);
         });
     });
+    // 打开新的标签页
+    chrome.tabs.create({url: './ui/main.html'});
     
 });
 btn4.addEventListener('click', function () {

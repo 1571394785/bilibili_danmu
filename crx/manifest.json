@@ -1,11 +1,10 @@
 {
-    "name": "Hello Extensions",
-    "description": "Base Level Extension",
+    "name": "弹幕姬",
+    "description": "享受在任意网站中观看弹幕的快感吧",
     "version": "1.0",
     "manifest_version": 3,
     "permissions": [
         "tabs",
-        "webRequest",
         "storage"
     ],
     "action": {

@@ -30,7 +30,6 @@ class App:
         global httpd
         httpd.shutdown()
         self.tk.destroy()
-        exit()
 def start_server():
     global httpd
     server_address = ('', 8000)

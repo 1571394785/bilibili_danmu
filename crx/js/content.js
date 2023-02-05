@@ -110,18 +110,10 @@ function set_time() {
         var nowTime = result.nowTime;
         var danmu_nowTime= $("#danmu").data("nowTime")/10;
         console.log("获取到的校准时间",nowTime,danmu_nowTime);
-        // 如果绝对值小于2秒，就不校准
-        if (Math.abs(nowTime - danmu_nowTime) > 20) {
+        // 如果绝对值小于3秒，就不校准
+        if (Math.abs(nowTime - danmu_nowTime) > 3) {
             $("#danmu").danmu("setTime", parseInt(nowTime*10));
             console.log("校准时间", nowTime,$("#danmu").data("danmuList"));
-            json1={
-                "text": "random_danmu",
-                "color": "#FE0302",
-                "size": "1",
-                "position": "0",
-                "time": $('#danmu').data("nowTime") + 1
-            }
-            $("#danmu").danmu("addDanmu", json1);
             
         }
 
@@ -165,7 +157,24 @@ function run(flag = 0) {
     // 启动校准
     setInterval(set_time, 1000);
 }
+// 监听窗口全屏
+document.addEventListener("fullscreenchange", function (e) {
+    if (document.fullscreenElement) {
+        console.log("进入全屏", document.fullscreenElement);
+        // 将#danmu移到全屏元素的父元素
+        var old = $("#danmu")
+        $(document.fullscreenElement).parent().append($("#danmu"));
+        // 删除原来的
+        old.remove();
+        // 重新设置弹幕的顶 左
+        $("#danmu").css("left", document.fullscreenElement.getBoundingClientRect().left);
+        $("#danmu").css("top", document.fullscreenElement.getBoundingClientRect().top + window.scrollY);
 
+    }
+    else {
+        console.log("退出全屏");
+    }
+});
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log(sender.tab ?
         "from a content script:" + sender.tab.url :

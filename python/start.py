@@ -55,6 +55,22 @@ class dandanplay:
             for j in i['episodes']:
                 self.所有番剧信息['array'][-1]['集信息'].append({'集名称':j['episodeTitle'],'集ID':j['episodeId']})
         return self.所有番剧信息
+    def 下载弹幕(self,集ID):
+        url='https://api.dandanplay.net/api/v2/comment/{}?withRelated=true'
+        r = requests.get(url.format(集ID))
+        # 创建xml
+        root = ET.Element('i')
+        for i in r.json()['comments']:
+            print(i['m'])
+            time=i['p']
+            ET.SubElement(root, 'd', p=time).text = i['m']
+        tree = ET.ElementTree(root)
+        if getattr(sys, 'frozen', False):
+            u = os.path.dirname(sys.executable)
+        else:
+            u = os.path.dirname(os.path.realpath(__file__))
+        os.makedirs(u+'/temp', exist_ok=True)
+        tree.write(u+'/temp/1.xml', encoding='utf-8', xml_declaration=True)
 class danmu(object):
     def __init__(self):
         self.data={'info':0,'text':[],'attr':[]}#弹幕数据
@@ -75,5 +91,4 @@ class danmu(object):
         return json1
 if __name__ == '__main__':
     dan1=dandanplay()
-    text=dan1.搜索番剧关键词('玉子')
-    dan1.解析番剧数据(text)
+    dan1.下载弹幕(95250002)
