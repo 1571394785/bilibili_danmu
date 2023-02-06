@@ -20,12 +20,15 @@ function search() {
     xhr.send();
 }
 function 解析(data){
+    // 删除之前的搜索结果
+    var result = document.getElementById("result");
+    result.innerHTML = "";
     var json=data
     console.log(json["animes"]);
     var li=document.createElement("li");
     for (var i = 0; i < json["animes"].length; i++) {
         var div=document.createElement("div");
-        div.innerHTML = json["animes"][i]["animeTitle"];
+        div.innerHTML ="<h2 class='result_title'>"+ json["animes"][i]["animeTitle"]+"</h2>";
         document.getElementById("result").appendChild(div);
         for (var j = 0; j < json["animes"][i]["episodes"].length; j++) {
             var li=document.createElement("li");
@@ -40,6 +43,22 @@ function 解析(data){
             li.innerHTML = json["animes"][i]["episodes"][j]["episodeTitle"];
             div.appendChild(li);
         }
+    }
+    // 给class=result_title添加点击事件
+    var result_title = document.getElementsByClassName("result_title");
+    for (var i = 0; i < result_title.length; i++) {
+        result_title[i].addEventListener("click", function () {
+            var result_item = document.getElementsByClassName("result-item");
+            for (var j = 0; j < result_item.length; j++) {
+                if (result_item[j].parentNode == this.parentNode) {
+                    if (result_item[j].style.display == "none" || result_item[j].style.display == "") {
+                        result_item[j].style.display = "block";
+                    } else {
+                        result_item[j].style.display = "none";
+                    }
+                }
+            }
+        });
     }
 }
 function 下载弹幕(episodeId) {
