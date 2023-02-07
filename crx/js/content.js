@@ -70,7 +70,7 @@ function isIframe() {
 // 监听video播放的时间
 function video_s() {
     var video = []
-    video_dom=document.getElementsByTagName('video');
+    video_dom = document.getElementsByTagName('video');
     for (var i = 0; i < video_dom.length; i++) {
         video.push(video_dom[i]);
     }
@@ -108,13 +108,12 @@ function add() {
 function set_time() {
     chrome.storage.local.get(['nowTime'], function (result) {
         var nowTime = result.nowTime;
-        var danmu_nowTime= $("#danmu").data("nowTime")/10;
-        console.log("获取到的校准时间",nowTime,danmu_nowTime);
+        var danmu_nowTime = $("#danmu").data("nowTime") / 10;
+        console.log("获取到的校准时间", nowTime, danmu_nowTime);
         // 如果绝对值小于3秒，就不校准
         if (Math.abs(nowTime - danmu_nowTime) > 3) {
-            $("#danmu").danmu("setTime", parseInt(nowTime*10));
-            console.log("校准时间", nowTime,$("#danmu").data("danmuList"));
-            
+            $("#danmu").danmu("setTime", parseInt(nowTime * 10));
+            console.log("校准时间", nowTime);
         }
 
     });
@@ -156,6 +155,7 @@ function run(flag = 0) {
     $("#danmu").css("pointer-events", "none");
     // 启动校准
     setInterval(set_time, 1000);
+    setInterval(video_s, 1000);
 }
 // 监听窗口全屏
 document.addEventListener("fullscreenchange", function (e) {
@@ -180,7 +180,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         "from a content script:" + sender.tab.url :
         "from the extension");
     if (request.greeting == "hello" && isIframe() == false)
+
         findDOM();
+    if (request.greeting == "hello" && isIframe() == ture)
+
     sendResponse({ farewell: "run" });
     if (request.greeting == "shibie")
         findAllVideo();
@@ -188,23 +191,26 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.greeting == "test")
         setInterval(video_s, 1000);
 });
-// 新建一个div用以显示框选元素
-var div = document.createElement('div');
-div.id = 'select';
-div.style.position = 'absolute';
-div.style.top = '0';
-div.style.left = '0';
-div.style.border = '1px solid red';
-div.style.zIndex = '999999';
-div.style.backgroundColor = 'rgba(255,0,0,0.6)';
-div.style.pointerEvents = 'none';
-document.body.appendChild(div);
-// 全局变量
-window.div = div;
+setInterval(video_s, 1000);
 
-// 新建一个弹幕div
-var danmu = document.createElement('div');
-danmu.id = 'danmu';
-danmu.style.position = 'absolute';
-danmu.style.backgroundColor = 'rgba(100,255,100,0.2)';
-document.body.appendChild(danmu);
+    // 新建一个div用以显示框选元素
+    var div = document.createElement('div');
+    div.id = 'select';
+    div.style.position = 'absolute';
+    div.style.top = '0';
+    div.style.left = '0';
+    div.style.border = '1px solid red';
+    div.style.zIndex = '999999';
+    div.style.backgroundColor = 'rgba(255,0,0,0.6)';
+    div.style.pointerEvents = 'none';
+    document.body.appendChild(div);
+    // 全局变量
+    window.div = div;
+
+    // 新建一个弹幕div
+    var danmu = document.createElement('div');
+    danmu.id = 'danmu';
+    danmu.style.position = 'absolute';
+    danmu.style.backgroundColor = 'rgba(100,255,100,0)';
+    document.body.appendChild(danmu);
+
