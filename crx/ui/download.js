@@ -82,6 +82,7 @@ function 将弹幕解析到xml(data){
     for (var i = 0; i < json["comments"].length; i++) {
         xml += '<d p="'+json["comments"][i]["p"]+'">'+json["comments"][i]["m"]+'</d>\n';
     }
+    console.log("运行了",i);
     xml += '</i>';
     console.log(xml);
     chrome.storage.local.set({danmu:xml});

@@ -34,8 +34,7 @@ btn3.addEventListener('click', function () {
             console.log(response.farewell);
         });
     });
-    // 打开新的标签页
-    chrome.tabs.create({url: './ui/main.html'});
+    
     
 });
 btn4.addEventListener('click', function () {
