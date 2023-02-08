@@ -11,6 +11,11 @@ function printDOM() {
         });
     });
 }
+btn.addEventListener('click', function () {
+    chrome.tabs.create({
+        url: 'https://1571394785.github.io/bilibili_danmu/'
+    });
+});
 btn1.addEventListener('click', function () {
     //通讯到background.js
     // chrome.runtime.sendMessage({

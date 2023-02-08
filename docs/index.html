@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <!-- 禁用手机缩放 -->
     <meta charset="utf-8" />
@@ -12,7 +13,8 @@
           ╰━┫     ╰╯╰┳━━━━╯
           / ┃┏┳┳━━┓┏┳┫
 shitty code ┗┛┗┛  ┗┛┗┛
---> <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+-->
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
     <!-- jquery.danmu.js (//github.com/chiruom/danmu/) - Licensed under the MIT license -->
     <script src="js\jquery.danmu.min.js" type="text/javascript"></script>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -23,7 +25,10 @@ shitty code ┗┛┗┛  ┗┛┗┛
             font-family: "inherit";
             margin: 0;
             user-select: none;
+            /* 隐藏滚动条 */
+            overflow-x: hidden;
         }
+
         h1 {
             font-size: 15vmin;
             font-weight: bold;
@@ -32,24 +37,28 @@ shitty code ┗┛┗┛  ┗┛┗┛
             transition: 0.5s;
             text-align: center;
         }
+
         h1:hover {
             color: rgba(255, 255, 255, 0.5);
             -webkit-text-stroke: 1.5px rgb(0, 0, 0);
         }
+
         .js {
             font-size: 7vmin;
             font-weight: bold;
             text-shadow: 0 0 2px #ffffff;
             text-align: center;
         }
-        #danmu{
+
+        #danmu {
             margin: 0;
             padding: 0;
         }
-        #head{
+
+        #head {
             width: max-content;
             height: auto;
-            background-color: rgba(0, 0, 0,0.2);
+            background-color: rgba(0, 0, 0, 0.2);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
             padding: 20px;
             position: absolute;
@@ -64,7 +73,8 @@ shitty code ┗┛┗┛  ┗┛┗┛
             perspective: 500px;
             cursor: pointer;
         }
-        #dld{
+
+        #dld {
             width: 100px;
             height: 50px;
             background-color: #00AEEC;
@@ -73,36 +83,98 @@ shitty code ┗┛┗┛  ┗┛┗┛
             border-radius: 10px;
             margin: 0;
             cursor: pointer;
-            font-size: 20px; 
+            font-size: 20px;
             font-weight: bold;
-            bottom:10%;
-            position:absolute;
-            left:50%;
-            transform:translateX(-50%);
+            bottom: 10%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
             transition: 0.25s;
         }
-        #dld:hover{
+
+        #dld:hover {
             background-color: #00AEEC;
             color: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
         }
+
         @media screen and (max-width: 600px) {
             h1 {
                 font-size: 20vmin;
             }
+
             .js {
                 font-size: 15vmin;
             }
         }
+
+        #bodys {
+            position: absolute;
+            top: 100%;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.8)10%);
+        }
+
+        #xiajian {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            bottom: 4%;
+            left: 50%;
+            transform: translateX(-50%) rotate(135deg);
+            z-index: -1;
+            border-style: solid solid none none;
+        }
+
+        #xiajian2 {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            bottom: 4.5%;
+            left: 50%;
+            transform: translateX(-50%) rotate(135deg);
+            z-index: -1;
+            border-style: solid solid none none;
+            filter: blur(2px);
+            /* 穿透 */
+            pointer-events: none;
+        }
+
+        #shuoming{
+            color: black;
+            position: relative;
+            width: 60%;
+            left: 0;
+            right: 0;
+            margin-left:auto;
+            margin-right:auto;
+
+        }
     </style>
 </head>
+
 <body>
     <div id="head">
         <h1>哔哩哔哩弹幕姬</h1>
-        <div class="js">这软件儿可以把B站弹幕塞进任何视频观看</div>
-        <div class="js">（目前智齿本地视频）</div>
+        <div class="js">该插件可以把弹幕塞进任何网页观看</div>
+        <div class="js" style="font-size: 3vmin;">（该api使用了弹弹play）</div>
     </div>
     <div id="danmu"></div>
+    <div id="xiajian"></div>
+    <div id="xiajian2"></div>
+    <div id="bodys">
+        <div id="shuoming">
+            <p>该插件仅供学习交流使用，禁止商用</p>
+            <p>使用方法<br>
+                1.点击上方下载按钮，安装弹幕姬插件<br>
+                2.打开任意番剧资源网站，如樱花动漫，风车动漫等<br>
+                3.点击弹幕姬插件图标，选择搜索弹幕，并选择相应的番剧与集数，等待加载完成，点击确定<br>
+                4.选择自动嵌入<br>
+                5.若自动嵌入不成功，则使用手动嵌入，手动选择元素，定位弹幕位置（该功能开发中，目前不支持全屏观看）<br>
+            </p>
+        </div>
+    </div>
     <!-- 按钮 -->
     <button id="dld">下载</button>
     <script>
@@ -126,28 +198,28 @@ shitty code ┗┛┗┛  ┗┛┗┛
         });
         // 生成弹幕div
         function createdanmu() {
-            danmu= window.danmu
-            color=["#FE0302","#FF7204","#FFAA02","#FFD302","#FFFF00","#A0EE00","#00CD00","#019899","#4266BE","#89D5FF","#CC0273","#222222","#9B9B9B","#FFFFFF"];
-            random_danmu=danmu[Math.floor(Math.random()*danmu.length)];
-            random_color=color[Math.floor(Math.random()*color.length)];
+            danmu = window.danmu
+            color = ["#FE0302", "#FF7204", "#FFAA02", "#FFD302", "#FFFF00", "#A0EE00", "#00CD00", "#019899", "#4266BE", "#89D5FF", "#CC0273", "#222222", "#9B9B9B", "#FFFFFF"];
+            random_danmu = danmu[Math.floor(Math.random() * danmu.length)];
+            random_color = color[Math.floor(Math.random() * color.length)];
             //random_position大部分0，少部分1，2
-            random_position=Math.floor(Math.random()*3);
-            random_position=String(random_position);
+            random_position = Math.floor(Math.random() * 3);
+            random_position = String(random_position);
             json1 = {
                 "text": random_danmu,
-                "color":random_color,
+                "color": random_color,
                 "size": "1",
                 "position": "0",
-                "time": $('#danmu').data("nowTime")+1
+                "time": $('#danmu').data("nowTime") + 1
             };
             return json1;
         }
-        function add(){
-            var dm=createdanmu()
-            $("#danmu").danmu("addDanmu",dm)
+        function add() {
+            var dm = createdanmu()
+            $("#danmu").danmu("addDanmu", dm)
         }
         //get弹幕
-        function getdanmu(){
+        function getdanmu() {
             $.ajax({
                 type: "GET",
                 url: "danmu.txt",
@@ -162,31 +234,34 @@ shitty code ┗┛┗┛  ┗┛┗┛
         $(window).resize(function () {
             danmuDom = document.getElementById("danmu");
             danmuDom.style.height = window.innerHeight - 1 + "px";
-            danmuDom.style.width = window.innerWidth-1 + "px";
+            danmuDom.style.width = window.innerWidth - 1 + "px";
         });
         //运行
         $("#danmu").danmu({
-            height: window.innerHeight-1,   //弹幕区域高度
-            width: window.innerWidth,   //弹幕区域宽度
-            zindex :-2,   //弹幕区域z-index属性
-            speed:9000,      //滚动弹幕的默认速度，这是数值是弹幕滚过每672像素所需要的时间（毫秒）
-            sumTime:65565,   //弹幕流的总时间
-            danmuLoop:false,   //是否循环播放弹幕
-            defaultFontColor:"#FFFFFF",   //弹幕的默认颜色
-            fontSizeSmall:16,     //小弹幕的字号大小
-            FontSizeBig:24,       //大弹幕的字号大小
-            opacity:"0.6",			//默认弹幕透明度
-            topBottonDanmuTime:6000,   // 顶部底部弹幕持续时间（毫秒）
-            SubtitleProtection:false,     //是否字幕保护
-            positionOptimize:false,         //是否位置优化，位置优化是指像AB站那样弹幕主要漂浮于区域上半部分
+            height: window.innerHeight - 1,   //弹幕区域高度
+            width: window.innerWidth - 5,   //弹幕区域宽度
+            zindex: -2,   //弹幕区域z-index属性
+            speed: 9000,      //滚动弹幕的默认速度，这是数值是弹幕滚过每672像素所需要的时间（毫秒）
+            sumTime: 65565,   //弹幕流的总时间
+            danmuLoop: false,   //是否循环播放弹幕
+            defaultFontColor: "#FFFFFF",   //弹幕的默认颜色
+            fontSizeSmall: 16,     //小弹幕的字号大小
+            FontSizeBig: 24,       //大弹幕的字号大小
+            opacity: "0.6",			//默认弹幕透明度
+            topBottonDanmuTime: 6000,   // 顶部底部弹幕持续时间（毫秒）
+            SubtitleProtection: false,     //是否字幕保护
+            positionOptimize: false,         //是否位置优化，位置优化是指像AB站那样弹幕主要漂浮于区域上半部分
             maxCountInScreen: 1000,   //屏幕上的最大的显示弹幕数目,弹幕数量过多时,优先加载最新的。
             maxCountPerSec: 1000      //每分秒钟最多的弹幕数目,弹幕数量过多时,优先加载最新的。
         });
         getdanmu();
         $("#danmu").danmu("danmuStart");
-        setInterval(add,101);
+        setInterval(add, 101);
+        // 点击xiajian往下滚
+        $("#xiajian").click(function () {
+            document.documentElement.scrollTo({ top: 1080, behavior: 'smooth' })
+        });
     </script>
 </body>
-</html>
 
-    
+</html>

@@ -87,6 +87,7 @@ function 将弹幕解析到xml(data){
     console.log(xml);
     chrome.storage.local.set({danmu:xml});
     alert("弹幕已经加载完成");
+    window.close();
 }
 document.getElementById("search").addEventListener("keydown", function (e) {
     if (e.keyCode == 13) {

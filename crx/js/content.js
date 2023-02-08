@@ -1,11 +1,11 @@
 class DanmuAnsis {
     jiexi(xml1) {
-        var hang=xml1.split('\n');
+        var hang = xml1.split('\n');
         console.log(hang.length);
         var text = [];
-        for(var i=0;i<hang.length;i++){
+        for (var i = 0; i < hang.length; i++) {
             // 如果是<d开头
-            if(hang[i].indexOf('<d')!=-1){
+            if (hang[i].indexOf('<d') != -1) {
                 var shuxing = hang[i].split('p="')[1].split('"')[0].split(',');
                 var aDanmu = { "text": hang[i].split('>')[1].split('<')[0], "color": shuxing[3], "size": 1, "position": 0, "time": parseInt(parseFloat(shuxing[0]) * 10) };
                 text.push(aDanmu);
@@ -55,8 +55,8 @@ function findDOM() {
         var div = window.div;
         if (dom.id == 'select') {
         } else {
-            div.style.top = dom.getBoundingClientRect().top + 'px';
-            div.style.left = dom.getBoundingClientRect().left + 'px';
+            $(window.div).css("left", dom.getBoundingClientRect().left + window.scrollX);
+            $(window.div).css("top", dom.getBoundingClientRect().top + window.scrollY);
             div.style.width = dom.offsetWidth + 'px';
             div.style.height = dom.offsetHeight + 'px';
         }
