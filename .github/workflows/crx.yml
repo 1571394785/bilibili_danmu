@@ -1,0 +1,24 @@
+name : 'Build_crx'
+# 当push ./crx/目录时触发
+on:
+  push:
+    paths:
+      - 'crx/**'
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 压缩crx
+        run: |
+          cd crx
+          7z a -tzip -mx=9 -r ../crx.zip *
+      - name: 上传crx
+        # 上传到release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.UPLOAD_TOKEN }}
+          file: crx.zip
+          tag: 'latest'
+          overwrite: true
+          file_glob: true
