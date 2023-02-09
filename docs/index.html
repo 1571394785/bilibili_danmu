@@ -29,25 +29,40 @@ shitty code ┗┛┗┛  ┗┛┗┛
             overflow-x: hidden;
         }
 
-        h1 {
-            font-size: 15vmin;
-            font-weight: bold;
-            margin-top: 10px;
-            text-shadow: 0 0 5px #ffffff;
-            transition: 0.5s;
-            text-align: center;
-        }
+        .h1 div {
+            width: 600px;
+            height: 314px;
+            margin: 0 auto 10px auto;
+            background-size: contain;
+            border-color: #ffffff;
+            border-style: none solid;
 
-        h1:hover {
-            color: rgba(255, 255, 255, 0.5);
-            -webkit-text-stroke: 1.5px rgb(0, 0, 0);
         }
 
         .js {
             font-size: 7vmin;
             font-weight: bold;
-            text-shadow: 0 0 2px #ffffff;
+            text-shadow: 0 0 5px #ffffff;
             text-align: center;
+            transition: 0.5s;
+        }
+
+        .js:hover {
+            color: rgba(255, 255, 255, 0.5);
+            -webkit-text-stroke: 1px rgb(0, 0, 0);
+        }
+
+        .js2 {
+            font-size: 3vmin;
+            font-weight: bold;
+            text-shadow: 0 0 4px #ffffff;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .js2:hover {
+            color: rgba(255, 255, 255, 0.5);
+            -webkit-text-stroke: 0.7px rgb(0, 0, 0);
         }
 
         #danmu {
@@ -85,7 +100,7 @@ shitty code ┗┛┗┛  ┗┛┗┛
             cursor: pointer;
             font-size: 20px;
             font-weight: bold;
-            bottom: 10%;
+            bottom: 13%;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
@@ -113,7 +128,7 @@ shitty code ┗┛┗┛  ┗┛┗┛
             top: 100%;
             height: 100%;
             width: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.8)10%);
+            transition: 0.3s;
         }
 
         #xiajian {
@@ -141,42 +156,57 @@ shitty code ┗┛┗┛  ┗┛┗┛
             pointer-events: none;
         }
 
-        #shuoming{
+        #shuoming {
             color: black;
             position: relative;
-            width: 60%;
+            width: max-content;
             left: 0;
             right: 0;
-            margin-left:auto;
-            margin-right:auto;
-
+            top: 10%;
+            margin-left: auto;
+            margin-right: auto;
+            /* 增大行间距 */
+            line-height: 3;
+            font-family: "inherit";
+            font-size: 20px;
+        }
+        #xuexi{
+            font-size: 15px;
+            color: #000000;
+            position: absolute;
+            bottom: 1%;
+            left: 50%;
+            transform: translateX(-50%);
         }
     </style>
 </head>
 
 <body>
     <div id="head">
-        <h1>哔哩哔哩弹幕姬</h1>
+        <div class="h1">
+            <div style="background-image: url('弹幕姬logo.png')"></div>
+        </div>
         <div class="js">该插件可以把弹幕塞进任何网页观看</div>
-        <div class="js" style="font-size: 3vmin;">（该api使用了弹弹play）</div>
+        <div class="js2">（该api使用了弹弹play）</div>
     </div>
     <div id="danmu"></div>
     <div id="xiajian"></div>
     <div id="xiajian2"></div>
     <div id="bodys">
+        <div id="xuexi">该插件仅供学习交流使用，禁止商用</div>
         <div id="shuoming">
-            <p>该插件仅供学习交流使用，禁止商用</p>
-            <p>使用方法<br>
-                1.点击上方下载按钮，安装弹幕姬插件<br>
-                2.打开任意番剧资源网站，如樱花动漫，风车动漫等<br>
-                3.点击弹幕姬插件图标，选择搜索弹幕，并选择相应的番剧与集数，等待加载完成，点击确定<br>
-                4.选择自动嵌入<br>
-                5.若自动嵌入不成功，则使用手动嵌入，手动选择元素，定位弹幕位置（该功能开发中，目前不支持全屏观看）<br>
+            <p style="text-align: center;">使用方法</p>
+            <p> 1.点击上方下载按钮，下载弹幕姬插件（目前需要科技上网才能下载）<br>
+                2.解压到任意文件夹，在浏览器扩展页面打开开发者模式，点击加载已解压的扩展程序，选择刚才的文件夹<br>
+                3.打开任意番剧资源网站，如樱花动漫，风车动漫等<br>
+                4.点击弹幕姬插件图标，选择搜索弹幕，并选择相应的番剧与集数，等待加载完成，点击确定<br>
+                5.打开番剧页面，选择弹幕姬的自动嵌入<br>
+                6.若自动嵌入不成功，则选择手动嵌入，手动选择元素定位弹幕位置（该功能开发中，目前不支持全屏）<br>
             </p>
         </div>
     </div>
     <!-- 按钮 -->
-    <button id="dld">下载</button>
+    <button id="dld" onclick="window.open('https://github.com/1571394785/bilibili_danmu/releases/download/latest/crx.zip')">下载</button>
     <script>
         //计算鼠标在#head上的位置
         $('#head').mousemove(function (e) {
@@ -261,6 +291,10 @@ shitty code ┗┛┗┛  ┗┛┗┛
         $("#xiajian").click(function () {
             document.documentElement.scrollTo({ top: 1080, behavior: 'smooth' })
         });
+        window.onscroll = function () {
+            var t = document.documentElement.scrollTop || document.body.scrollTop;
+            document.getElementById("bodys").style.backgroundColor = "rgba(255,255,255," + t / 700 + ")";
+        }
     </script>
 </body>
 

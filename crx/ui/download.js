@@ -1,4 +1,5 @@
 function search() {
+    movelogo();
     var search = document.getElementById("search").value;
     if (search == "") {
         alert("请输入要搜索的番剧名称");
@@ -18,6 +19,14 @@ function search() {
 
     }
     xhr.send();
+}
+function movelogo(){
+    logo=document.getElementById("logo");
+    logo.style.left=0;
+    logo.style.top=0;
+    logo.style.margin=0;
+    logo.style.position='absolute';
+    logo.style.transform='translate(0,0)';
 }
 function 解析(data){
     // 删除之前的搜索结果
