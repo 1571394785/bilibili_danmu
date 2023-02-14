@@ -1,9 +1,9 @@
 {
     "name": "弹幕姬",
     "icons": {
-        "16": "logo.png",
-        "48": "logo.png",
-        "128": "logo.png"
+        "16": "logo16.png",
+        "48": "logo48.png",
+        "128": "logo128.png"
     },
     "description": "享受在任意网站中观看弹幕的快感吧",
     "version": "1.0",
