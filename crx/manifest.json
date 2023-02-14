@@ -1,11 +1,11 @@
 {
-    "name": "弹幕姬",
+    "name": "__MSG_title__",
     "icons": {
         "16": "弹幕姬图标.png",
         "48": "弹幕姬图标.png",
         "128": "弹幕姬图标.png"
     },
-    "description": "享受在任意网站中观看弹幕的快感吧",
+    "description": "__MSG_pluginDesc__",
     "version": "1.0",
     "manifest_version": 3,
     "permissions": [
@@ -37,5 +37,6 @@
             "run_at": "document_end",
             "all_frames": true
         } 
-    ]
+    ],
+    "default_locale": "zh_CN"
 }
